@@ -1,0 +1,9 @@
+{
+  "name": "store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "a simple Store",
+  "main": "index.js",
+  "license": "MIT",
+  "author": "Ali Ziaei Jazi",
+}
