@@ -1,6 +1,5 @@
 import {Redirect, BrowserRouter, Route, Switch} from "react-router-dom";
 import {Login} from "../pages/Login/Login.page";
-import {Protected} from "./components/Protected/Protected.route";
 
 
 function AppRoute() {
