@@ -1,7 +1,6 @@
 import {Redirect, BrowserRouter, Route, Switch} from "react-router-dom";
 import {Login} from "../pages/Login/Login.page";
-import {Management} from "../Layout";
-
+import {Management, Users} from "../Layout";
 
 function AppRoute() {
     return (
@@ -30,22 +29,26 @@ function AppRoute() {
                 {/*managment*/}
                 {/*users*/}
                 <Route path="/" exact>
-                    Main
+                    <Users> Main
+                    </Users>
                 </Route>
                 <Route exact path="/products">
-                    Products
+                    <Users>Products</Users>
+
                 </Route>
                 <Route path="product">
-                    productdetail
+                    <Users>productdetail</Users>
                 </Route>
                 <Route path="/basket">
-                    basket
+                    <Users>basket</Users>
+
                 </Route>
                 <Route path="/cheackout">
-                    cheackout
+                    <Users>cheackout</Users>
                 </Route>
                 <Route path="/paymentresult">
-                    paymentresult
+                    <Users>paymentresult</Users>
+
                 </Route>
                 <Route path="/not-found">
                     not_found
