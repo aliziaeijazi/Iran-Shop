@@ -24,6 +24,7 @@ const theme = createMuiTheme({
             '"Segoe UI Symbol"',
         ].join(','),
     },
+    direction:"rtl",
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +88,7 @@ function Login() {
                             color="primary"
                             className={classes.submit}
                             onClick={()=>{
-                            document.location.href="/managment";
+                            document.location.href="/management/productlist";
                                 // console.log("username :" ,  usernameref.current.children[1].children[0].value , "password :" , passwordref.current.children[1].children[0].value );
                             }}
                         >
