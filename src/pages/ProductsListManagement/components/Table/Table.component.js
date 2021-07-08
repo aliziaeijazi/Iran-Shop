@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Avatar, Button} from "@material-ui/core";
+import {FeachProducts} from "../../../../api/store.api";
+import {BASE_URL} from "../../../../configs/variable.config";
 
 const columns = [
     {id: 'action', label: 'عملیات', align: "center", minWidth: 200},
@@ -43,28 +45,13 @@ function createData(id =0, imageSrc, productName, groupName) {
             ویرایش
         </Button>
     </div>
-    let avatar = <Avatar alt={productName} src={imageSrc} />
+    let avatar = <Avatar  alt={productName} src={`${BASE_URL}${imageSrc}`} />
     return {avatar, productName, groupName, action};
 }
-
-const rows = [
-    createData(1, 'India', 'IN', 1324171354, 3287263),
-    createData(2, 'China', 'CN', 1403500365, 9596961),
-    createData(3, 'Italy', 'IT', 60483973, 301340),
-    createData(4, 'United States', 'US', 327167434, 9833520),
-    createData(5, 'Canada', 'CA', 37602103, 9984670),
-    createData(6, 'Australia', 'AU', 25475400, 7692024),
-    createData(7, 'Germany', 'DE', 83019200, 357578),
-    createData(8, 'Ireland', 'IE', 4857000, 70273),
-    createData(9, 'Mexico', 'MX', 126577691, 1972550),
-    createData(10, 'Japan', 'JP', 126317000, 377973),
-    createData(11, 'France', 'FR', 67022000, 640679),
-    createData(12, 'United Kingdom', 'GB', 67545757, 242495),
-    createData(13, 'Russia', 'RU', 146793744, 17098246),
-    createData(14, 'Nigeria', 'NG', 200962417, 923768),
-    createData(15, 'Brazil', 'BR', 210147125, 8515767),
-];
-
+let rows =[]
+function createRowsData(data){
+    rows =  data.map((target)=>createData(target.id, target.image, target.name, target.group))
+}
 const useStyles = makeStyles({
     root: {
         width: '80%',
@@ -75,11 +62,18 @@ const useStyles = makeStyles({
     },
 });
 
-export default function StickyHeadTable() {
+const gettingData = async (setData) =>{
+    const data = await FeachProducts()
+    await createRowsData(data)
+    setData(data)
+}
+export default function  StickyHeadTable() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [data, setData] = React.useState([])
+    useEffect(()=>{gettingData(setData)
+    },[])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };

@@ -7,10 +7,12 @@ import {ToastContainer} from "react-toastify";
 
 ReactDOM.render(
     <React.StrictMode>
-        <AppRoute/>
-        <ToastContainer position="bottom-left" autoClose={5000} hideProgressBar={false} newestOnTop={false}
-                        closeOnClick
-                        rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
+        <>
+            <AppRoute/>
+            <ToastContainer position="bottom-left" autoClose={5000} hideProgressBar={false} newestOnTop={false}
+                            closeOnClick
+                            rtl={true} pauseOnFocusLoss draggable pauseOnHover/>
+        </>
     </React.StrictMode>,
     document.getElementById('root')
 );

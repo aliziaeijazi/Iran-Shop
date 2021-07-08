@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
     },
     paper: {
-        padding: theme.spacing(3),
+        padding: theme.spacing(2),
         display: "flex",
         flex: 1,
         justifyContent: "space-between",
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     title:{
         display: 'flex',
         '& > *': {
-            margin: theme.spacing(4),
+            margin: theme.spacing(2),
         },
         width:"80%",
         justifyContent:"space-between",
