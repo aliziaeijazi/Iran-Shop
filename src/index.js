@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {AppRoute} from "./route/App.route";
+import {ToastContainer} from "react-toastify";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AppRoute />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <AppRoute/>
+        <ToastContainer position="bottom-left" autoClose={5000} hideProgressBar={false} newestOnTop={false}
+                        closeOnClick
+                        rtl={false} pauseOnFocusLoss draggable pauseOnHover/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
