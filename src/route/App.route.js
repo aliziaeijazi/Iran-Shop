@@ -1,7 +1,7 @@
 import {Redirect, BrowserRouter, Route, Switch} from "react-router-dom";
 import {Login} from "../pages/Login/Login.page";
 import {Management, Users} from "../Layout";
-import {ProductListManagement} from "../pages";
+import {ProductListManagement, StoreManagement} from "../pages";
 
 function AppRoute() {
     return (
@@ -17,9 +17,8 @@ function AppRoute() {
                     </Management>
                 </Route>
                 <Route path="/management/supply">
-
                     <Management>
-                        supply
+                        <StoreManagement/>
                     </Management>
                 </Route>
                 <Route path="/management/orders">
