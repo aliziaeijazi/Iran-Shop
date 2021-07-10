@@ -11,8 +11,9 @@ export function FeachPhoto (id){
         .then((response)=>response.data)
         .catch((error)=> Promise.reject(error))
 }
-export function feachTodo(id) {
-    return http.get(`/todos/${id}`)
+export function FeachOrders(kind) {
+    const status = (kind == "notdelivered" ? "true" : "false")
+    return http.get(`/orders?status_ne=${status}`)
         .then((response)=>response.data)
         .catch((error)=> Promise.reject(error))
 }
