@@ -24,7 +24,7 @@ const theme = createMuiTheme({
             '"Segoe UI Symbol"',
         ].join(','),
     },
-    direction:"rtl",
+    direction: "rtl",
 });
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,9 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
+    root: {display: "flex", height: "100vh", alignItems: "center"}
 }));
+
 function Login() {
     const classes = useStyles();
     const usernameref = createRef()
@@ -50,7 +52,7 @@ function Login() {
 
     return (
         <MuiThemeProvider theme={theme}>
-            <Container component="main" maxWidth="xs">
+            <Container component="main" maxWidth="xs" className={classes.root}>
                 <CssBaseline/>
                 <div className={classes.paper}>
                     <Typography component="h1" variant="h5">
@@ -87,8 +89,8 @@ function Login() {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
-                            onClick={()=>{
-                            document.location.href="/management/productlist";
+                            onClick={() => {
+                                document.location.href = "/management/productlist";
                                 // console.log("username :" ,  usernameref.current.children[1].children[0].value , "password :" , passwordref.current.children[1].children[0].value );
                             }}
                         >
@@ -107,4 +109,5 @@ function Login() {
         </MuiThemeProvider>
     );
 }
+
 export {Login}
