@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "joi": "^17.4.0",
+    "jss-rtl": "^0.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
@@ -23,10 +24,10 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "concurrently": "^6.2.0",
     "json-server": "^0.16.3",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.7",
-    "concurrently": "^6.2.0"
+    "nodemon": "^2.0.7"
   },
   "scripts": {
     "store": "react-scripts start",
