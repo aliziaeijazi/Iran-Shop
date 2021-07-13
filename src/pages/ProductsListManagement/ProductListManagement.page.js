@@ -52,18 +52,25 @@ const theme = createMuiTheme({
 
 function ProductListManagement() {
     const classes = useStyles();
+    const [modal , setmodal] = React.useState(false)
+    const handleInsert = () =>
+    {
+        setmodal(true)
+    }
 
     return (
         <MuiThemeProvider theme={theme}>
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={handleInsert}>
                             افزودن کالا
                         </Button>
                         <Typography variant="h5">مدیریت کالاها</Typography>
                     </div>
-                    <StickyHeadTable></StickyHeadTable>
+                    <StickyHeadTable open={modal} falsemodal={()=>{
+                        setmodal(false)
+                    }} ></StickyHeadTable>
                 </Paper>
             </div>
         </MuiThemeProvider>

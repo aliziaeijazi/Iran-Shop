@@ -7,12 +7,14 @@ import {ToastContainer} from "react-toastify";
 import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 ReactDOM.render(
     <React.StrictMode>
         <RTL>
             <AppRoute/>
-            <ToastContainer position="bottom-left" autoClose={5000} hideProgressBar={false} newestOnTop={false}
+            <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false}
                             closeOnClick
                             rtl={true} pauseOnFocusLoss draggable pauseOnHover/>
         </RTL>
