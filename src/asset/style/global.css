@@ -4,24 +4,28 @@
     font-weight: 400;
     src: url(../font/IRANSansWeb_Regular.woff) format("truetype");
 }
+
 @font-face {
     font-family: IRANSans;
     font-style: normal;
     font-weight: 900;
     src: url(../font/IRANSansWeb_Bold.woff) format("truetype");
 }
+
 @font-face {
     font-family: IRANYekan;
     src: url(../font/iranyekanwebregular.woff2) format("woff2");
     font-weight: 400;
     font-style: normal;
 }
+
 @font-face {
     font-family: IRANYekan;
     src: url(../font/iranyekanwebbold.woff2) format("woff2");
     font-weight: 700;
     font-style: normal;
 }
+
 body {
     direction: rtl;
     margin: 0;
@@ -29,5 +33,9 @@ body {
 
 * {
     font-family: IRANSans !important;
-    font-size: 18px;
+    font-size: 15px;
+}
+.MuiTablePagination-actions {
+    display: flex;
+    flex-direction: row-reverse;
 }

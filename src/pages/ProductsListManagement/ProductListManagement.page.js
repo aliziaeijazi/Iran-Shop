@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(2),
         },
-        width:"85%",
+        width:"90%",
         justifyContent:"space-between",
     },
     bold:{
@@ -47,7 +47,7 @@ function ProductListManagement() {
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
-                        <Typography className={classes.bold}  variant="h5" >مدیریت کالاها</Typography>
+                        <Typography className={classes.bold}  variant="h6" >مدیریت کالاها</Typography>
                         <Button className={classes.bold} variant="contained" color="primary" onClick={handleInsert}>
                             افزودن کالا
                         </Button>

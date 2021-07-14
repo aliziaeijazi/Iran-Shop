@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,14 +12,16 @@ import {Avatar, Button, createMuiTheme} from "@material-ui/core";
 import {DeleteProduct, FeachProducts} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
 import InsertProduct from "../Modal/Modal.component";
+import {createTheme, ThemeProvider} from '@material-ui/core/styles';
+import {faIR} from '@material-ui/core/locale';
 
 const useStyles = makeStyles({
     root: {
-        width: '85%',
+        width: '90%',
     },
     container: {
-        minHeight: 800,
-        maxHeight: 800,
+        minHeight: "73vh",
+        maxHeight: "73vh",
     },
     bold: {
         fontWeight: "bolder",
@@ -29,7 +31,12 @@ const useStyles = makeStyles({
         width: 70,
         height: 70,
     },
+    btn:{
+        margin: 2,
+        minWidth:90,
+    }
 });
+
 
 
 export default function StickyHeadTable(props) {
@@ -81,11 +88,11 @@ export default function StickyHeadTable(props) {
 
     const createData = (id = 0, imageSrc, productName, groupName) => {
         let action = <div>
-            <Button id={id} className={classes.bold} variant="contained" color="secondary"
+            <Button id={id} className={classes.btn} variant="contained" color="secondary"
                     onClick={(event) => handleDelete(event.target)}>
                 حذف
             </Button>
-            <Button id={id} className={classes.bold} variant="contained" color="primary"
+            <Button id={id} className={classes.btn} variant="contained" color="primary"
                     onClick={(event) => handleEdit(event.target)}>
                 ویرایش
             </Button>
@@ -134,56 +141,57 @@ export default function StickyHeadTable(props) {
 
     const rows = data
     return (
-        <Paper className={classes.root}>
-            <TableContainer className={classes.container}>
-                <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableCell className={classes.bold}
-                                           key={column.id}
-                                           align={column.align}
-                                           style={{minWidth: column.minWidth}}
-                                >
-                                    {column.label}
-                                </TableCell>
-                            ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                    {columns.map((column) => {
-                                        const value = row[column.id];
-                                        return (
-                                            <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                        );
-                                    })}
-                                </TableRow>
-                            );
-                        })}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[5, 10, 25, 100]}
-                labelDisplayedRows={({
-                                         from,
-                                         to,
-                                         count
-                                     }) =>  ` ${from}-${to} ` +  " از " +   `  ${count !== -1 ? count : 'more than' + to}` + " "  }
-                component="div"
-                count={rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                onChangePage={handleChangePage}
-                labelRowsPerPage={'تعداد سطر در هر صفحه'}
-            />
-            <InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>
-        </Paper>
+            <Paper className={classes.root}>
+                <TableContainer className={classes.container}>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell className={classes.bold}
+                                               key={column.id}
+                                               align={column.align}
+                                               style={{minWidth: column.minWidth}}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                                return (
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                        {columns.map((column) => {
+                                            const value = row[column.id];
+                                            return (
+                                                <TableCell key={column.id} align={column.align}>
+                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                </TableCell>
+                                            );
+                                        })}
+                                    </TableRow>
+                                );
+                            })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25, 100]}
+                    labelDisplayedRows={({
+                                             from,
+                                             to,
+                                             count
+                                         }) => ` ${from}-${to} ` + " از " + `  ${count !== -1 ? count : 'more than' + to}` + " "}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                    onChangePage={handleChangePage}
+                    labelRowsPerPage={'تعداد سطر در هر صفحه'}
+
+                />
+                <InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>
+            </Paper>
     );
 }

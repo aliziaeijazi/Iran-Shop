@@ -22,7 +22,7 @@ const columns = [
     },
     {
         id: 'sumBuying',
-        label: 'مجموع مبلغ',
+        label: 'مجموع مبلغ(تومان)',
         minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('fa-IR'),
@@ -33,7 +33,7 @@ const columns = [
         minWidth: 100,
         align: 'center',
     },
-    {id: 'action', label: 'عملیات', align: "center", minWidth: 100}
+    {id: 'action', label: 'عملیات', align: "center", minWidth: 130}
 ];
 
 function createData(id = 0, orderTime, sumBuying, username) {
@@ -52,12 +52,15 @@ function createRowsData(data) {
 
 const useStyles = makeStyles({
     root: {
-        width: '85%',
+        width: '90%',
     },
     container: {
-        minHeight: 800,
-        maxHeight: 800,
+        minHeight: "73vh",
+        maxHeight: "73vh",
     },
+    bold:{
+        fontWeight:"bolder",
+    }
 });
 
 const gettingData = async (setData, kind) => {
@@ -69,7 +72,7 @@ const gettingData = async (setData, kind) => {
 export default function StickyHeadTable(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [data, setData] = React.useState([])
     useEffect(() => {
         gettingData(setData, props.kind)
@@ -94,6 +97,7 @@ export default function StickyHeadTable(props) {
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
+                                    className={classes.bold}
                                     key={column.id}
                                     align={column.align}
                                     style={{minWidth: column.minWidth}}

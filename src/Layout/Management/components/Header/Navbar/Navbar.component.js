@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {createRef, useEffect, useRef} from 'react';
 import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -6,34 +6,36 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 const useStyles = makeStyles({
     root: {
         width: 500,
-        fontWeight:"bolder"
+        fontWeight:"bolder",
     },
-    btnbackfground: {
+    btnbackground: {
         backgroundColor: "lightskyblue",
     }
 });
 
 function NavBar() {
     const classes = useStyles();
-    const [value, setValue] = React.useState();
+    const [value, setValue] = React.useState(0);
     useEffect(() => {
-        console.log(document.location.pathname)
         if (document.location.pathname == "/management/productlist") setValue(0)
         else if (document.location.pathname == "/management/supply") setValue(1)
         else if (document.location.pathname == "/management/orders") setValue(2)
+        handlechang()
     })
+    const btnRef=[createRef() ,createRef() , createRef()]
+    const handlechang =() =>{
+        btnRef.map((target)=>target.current.classList.remove(classes.btnbackground))
+        btnRef[value].current.classList.add(classes.btnbackground)
+    }
     return (
         <BottomNavigation
             value={value}
             showLabels
             className={classes.root}
         >
-            <BottomNavigationAction label="کالاها" href={"/management/productlist"}
-                                    className={value == 0 && classes.btnbackfground}/>
-            <BottomNavigationAction label="موجودی و قیمت ها" href={"/management/supply"}
-                                    className={value == 1 && classes.btnbackfground}/>
-            <BottomNavigationAction label="سفارش ها" href={"/management/orders"}
-                                    className={value == 2 && classes.btnbackfground}/>
+            <BottomNavigationAction ref={btnRef[0]} label="کالاها" href={"/management/productlist"}/>
+            <BottomNavigationAction ref={btnRef[1]} label="موجودی و قیمت ها" href={"/management/supply"}/>
+            <BottomNavigationAction ref={btnRef[2]} label="سفارش ها" href={"/management/orders"}/>
         </BottomNavigation>
 
     );

@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     appbar: {
         backgroundColor: "white",
         color: "black",
-
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -23,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
     },
     flex: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
+        flexWrap:"wrap"
     }
 }));
 

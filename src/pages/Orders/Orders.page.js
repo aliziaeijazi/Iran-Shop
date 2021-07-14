@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
-import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import {createMuiTheme, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import StickyHeadTable from "./components/Table/Table.component";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -31,13 +31,16 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(2),
         },
-        width: "85%",
+        width: "90%",
         justifyContent: "space-between",
 
     },
     radiogroup:{
         display:"flex",
         flexDirection:"row"
+    },
+    bold:{
+        fontWeight:"bolder",
     }
 }));
 function Orders() {
@@ -50,7 +53,7 @@ function Orders() {
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
-                        <Typography variant="h5">مدیریت سفارش ها</Typography>
+                        <Typography className={classes.bold} variant="h6">مدیریت سفارش ها</Typography>
                         <FormControl component="fieldset">
                             <RadioGroup aria-label="" name="Orders" value={kind}   className={classes.radiogroup} onChange={handleChange}>
                                 <FormControlLabel value="delivered" control={<Radio/>} label="سفارش های تحویل شده"/>

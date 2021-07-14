@@ -10,13 +10,12 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {InputBase} from "@material-ui/core";
 import {FeachProducts} from "../../../../api/store.api";
-import {BASE_URL} from "../../../../configs/variable.config";
 
 const columns = [{
     id: 'productName',
     label: 'نام کالا',
     minWidth: 200,
-    align: 'right',
+    align: 'center',
 },
     {
         id: 'cost',
@@ -53,16 +52,16 @@ function createData(id = 0, counter, _cost, productName) {
 let rows = []
 
 function createRowsData(data) {
-    rows = data.map((target) => createData(target.id, target.count, target.price, target.name))
+    rows = data.map((target) => createData(target.id, +(target.count), +(target.price), target.name))
 }
 
 const useStyles = makeStyles({
     root: {
-        width: '85%',
+        width: '90%',
     },
     container: {
-        minHeight: 800,
-        maxHeight: 800,
+        minHeight: "73vh",
+        maxHeight: "73vh",
     },
     bold: {
         fontWeight: "bold"
