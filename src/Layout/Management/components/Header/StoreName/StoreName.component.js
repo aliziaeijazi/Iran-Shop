@@ -13,13 +13,14 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     square: {
-        width:"80px",
-
+        width:120,
+        height:50
     },
     title: {
         display:"flex",
-        fontFamily: "vazir",
-        alignItems:"center"
+        fontFamily: "IranSans",
+        alignItems:"center",
+        fontWeight:"bolder"
     }
 
 }));
@@ -29,9 +30,9 @@ function StoreName() {
 
     return (
         <div className={classes.root}>
-            <Typography className={classes.title}>پنل مدیریت فروشگاه ایران زمین</Typography>
             <Avatar variant="rounded" className={classes.square} src={Logo}>
             </Avatar>
+            <Typography className={classes.title}>پنل مدیریت فروشگاه ایران زمین</Typography>
         </div>
     );
 }

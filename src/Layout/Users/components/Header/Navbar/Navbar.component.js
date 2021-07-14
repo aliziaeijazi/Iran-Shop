@@ -6,7 +6,7 @@ import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 
 const useStyles = makeStyles({
     root: {
-        width: "300px",
+        width: 200,
     },
     text: {
         color: "blue",
@@ -15,21 +15,13 @@ const useStyles = makeStyles({
 const theme = createMuiTheme(
     {
         typography: {
-            fontSize: "20",
+            fontSize: 25,
             fontFamily: [
-                'vazir',
-                'BlinkMacSystemFont',
-                '"Segoe UI"',
-                'Roboto',
-                '"Helvetica Neue"',
-                'Arial',
-                'sans-serif',
-                '"Apple Color Emoji"',
-                '"Segoe UI Emoji"',
-                '"Segoe UI Symbol"',
+                "IranSans",
+                "IranYekan"
             ].join(','),
+
         },
-        direction: "rtl",
 
     }
 )
@@ -41,10 +33,9 @@ function NavBar() {
             <BottomNavigation
                 showLabels
                 className={classes.root}
-
             >
-                    <BottomNavigationAction icon={<LocalGroceryStoreIcon/>}label="سبد خرید" href={"/basket"} className={classes.text}/>
                 <BottomNavigationAction label="مدیریت" href={"/login"} className={classes.text}/>
+                <BottomNavigationAction icon={<LocalGroceryStoreIcon/>} href={"/basket"} className={classes.text}/>
             </BottomNavigation>
         </MuiThemeProvider>
 

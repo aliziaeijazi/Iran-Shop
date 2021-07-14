@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         '& > *': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(2),
         },
         flex: 1,
 
@@ -27,40 +27,31 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(2),
         },
-        width: "80%",
+        width: "85%",
         justifyContent: "space-between",
 
+    },
+    bold:{
+        fontWeight:"bold"
     }
 }));
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            'vazir',
-            'BlinkMacSystemFont',
-            '"Helvetica Neue"',
-            'Arial',
-        ].join(','),
-    },
-});
+
 
 function StoreManagement() {
     const classes = useStyles();
 
     return (
-        <MuiThemeProvider theme={theme}>
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
-                        <Button variant="contained" color="primary">
+                        <Typography className={classes.bold} variant="h5">مدیریت موجودی و قیمت ها</Typography>
+                        <Button className={classes.bold} variant="contained" color="primary">
                             ذخیره
                         </Button>
-                        <Typography variant="h5">مدیریت موجودی و قیمت ها</Typography>
                     </div>
                     <StickyHeadTable></StickyHeadTable>
                 </Paper>
             </div>
-        </MuiThemeProvider>
-
     );
 
 }

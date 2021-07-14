@@ -59,23 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            'vazir',
-            'BlinkMacSystemFont',
-            '"Helvetica Neue"',
-            'Arial',
-        ].join(','),
-    },
-    textarea: {
-        fontFamily: [
-            'vazir',
-            'BlinkMacSystemFont',
-            '"Helvetica Neue"',
-            'Arial',
-        ].join(','),
-    },
-
     direction: "rtl"
 });
 
@@ -138,13 +121,13 @@ export default function InsertProduct(props) {
     }, [props.open])
     const handleSubmit = async() => {
         if( !data.name )
-            toast.error(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>لطفا نام کالا را وارد کنید.</h3>)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام کالا را وارد کنید.</h3>)
         else if( !data.groupname  )
-            toast.error(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>لطفا گروه کالا را انتخاب کنید.</h3>)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا گروه کالا را انتخاب کنید.</h3>)
         else if(!data.describtion )
-            toast.error(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>لطفا توضیحاتی را درمورد کالا  وارد کنید.</h3>)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا توضیحاتی را درمورد کالا  وارد کنید.</h3>)
         else if( !(data.image || data.newimage))
-            toast.error(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>لطفا عکسی را برای  کالا انتخاب  کنید.</h3>)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا عکسی را برای  کالا انتخاب  کنید.</h3>)
         else{
             if (props.id) {
                 await EditData(data)
@@ -169,19 +152,19 @@ export default function InsertProduct(props) {
             >
                 <MuiThemeProvider theme={theme}>
                     <div style={modalStyle} className={`${classes.paper} ${classes.modalroot}`}>
+                        <Typography variant="h5">افزودن/ویرایش کالا</Typography>
                         <Button type="button" onClick={handleClose}>
                             X
                         </Button>
-                        <Typography variant="h5">افزودن/ویرایش کالا</Typography>
                         <FormControl component="fieldset">
-                            <FormLabel dir={"rtl"}>تصویر کالا</FormLabel>
-                            <TextField accept="image/*" color="primary" id={"image"}
+                            <FormLabel >تصویر کالا</FormLabel>
+                            <TextField dir={"ltr"} accept="image/*" color="primary" id={"image"}
                                        onChange={(event) => handleInputFile(event.target)} type="file"/>
                             <TextField required id="name" label="نام کالا" className={classes.fieldmargin}
                                        onChange={(event) => handleChangeData("name", event.target.value)}
                                        defaultValue={data.name}/>
-                            <FormControl required className={`${classes.formControl} ${classes.fieldmargin}`}>
-                                <InputLabel>: دسته بندی</InputLabel>
+                            <FormControl   required className={`${classes.formControl} ${classes.fieldmargin}`}>
+                                <InputLabel >دسته بندی:</InputLabel>
                                 <Select
                                     native
                                     value={state}

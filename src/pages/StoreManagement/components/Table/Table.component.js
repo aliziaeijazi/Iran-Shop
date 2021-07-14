@@ -8,37 +8,44 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { InputBase} from "@material-ui/core";
+import {InputBase} from "@material-ui/core";
 import {FeachProducts} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
 
-const columns = [
-    {id: 'count', label: 'موجودی', align: "center", minWidth: 200},
+const columns = [{
+    id: 'productName',
+    label: 'نام کالا',
+    minWidth: 200,
+    align: 'right',
+},
     {
         id: 'cost',
-        label: 'قیمت',
-        minWidth: 500,
+        label: 'قیمت(تومان)',
+        minWidth: 100,
         align: 'center',
+        format: (value) => value.toLocaleString('fa-IR'),
+
     },
     {
-        id: 'productName',
-        label: 'نام کالا',
-        minWidth: 500,
-        align: 'center',
-    }
+        id: 'count', label: 'موجودی', align: "center", minWidth: 10, format: (value) => value.toLocaleString('fa-IR'),
+    },
+
+
 ];
 
 function createData(id = 0, counter, _cost, productName) {
-    let count = <InputBase id={id} defaultValue={counter} type="number" inputProps={{readOnly: true}}
+    let count = <InputBase id={id} defaultValue={counter} type="number"
+                           inputProps={{readOnly: true, style: {textAlign: "center"}}}
                            onClick={(event) => {
                                event.target.readOnly = false;
                                event.target.style.borderBottom = "2px solid red"
                            }}/>
-    let cost = <InputBase id={id} defaultValue={_cost} type="number" inputProps={{readOnly: true}}
+    let cost = <InputBase id={id} defaultValue={_cost} type="number"
+                          inputProps={{readOnly: true, style: {textAlign: "center"}}}
                           onClick={(event) => {
-        event.target.readOnly = false;
-        event.target.style.borderBottom = "2px solid red"
-    }}/>
+                              event.target.readOnly = false;
+                              event.target.style.borderBottom = "2px solid red"
+                          }}/>
 
     return {productName, cost, count};
 }
@@ -51,12 +58,15 @@ function createRowsData(data) {
 
 const useStyles = makeStyles({
     root: {
-        width: '80%',
+        width: '85%',
     },
     container: {
-        minHeight: 700,
-        maxHeight: 700,
+        minHeight: 800,
+        maxHeight: 800,
     },
+    bold: {
+        fontWeight: "bold"
+    }
 });
 
 const gettingData = async (setData) => {
@@ -67,7 +77,7 @@ const gettingData = async (setData) => {
 export default function StickyHeadTable() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [data, setData] = React.useState([])
     useEffect(() => {
         gettingData(setData)
@@ -89,6 +99,7 @@ export default function StickyHeadTable() {
                         <TableRow>
                             {columns.map((column) => (
                                 <TableCell
+                                    className={classes.bold}
                                     key={column.id}
                                     align={column.align}
                                     style={{minWidth: column.minWidth}}
@@ -118,12 +129,18 @@ export default function StickyHeadTable() {
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25, 100]}
+                labelDisplayedRows={({
+                                         from,
+                                         to,
+                                         count
+                                     }) => ` ${from}-${to} ` + " از " + `  ${count !== -1 ? count : 'more than' + to}` + " "}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onChangePage={handleChangePage}
+                labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
         </Paper>
     );

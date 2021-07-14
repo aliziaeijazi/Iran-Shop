@@ -12,15 +12,22 @@ import {Avatar, Button, createMuiTheme} from "@material-ui/core";
 import {DeleteProduct, FeachProducts} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
 import InsertProduct from "../Modal/Modal.component";
-import {toast} from "react-toastify";
 
 const useStyles = makeStyles({
     root: {
-        width: '80%',
+        width: '85%',
     },
     container: {
-        minHeight: 700,
-        maxHeight: 700,
+        minHeight: 800,
+        maxHeight: 800,
+    },
+    bold: {
+        fontWeight: "bolder",
+        margin: 2,
+    },
+    avatar: {
+        width: 70,
+        height: 70,
     },
 });
 
@@ -28,31 +35,33 @@ const useStyles = makeStyles({
 export default function StickyHeadTable(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [data, setData] = React.useState([])
     const [modalId, setId] = React.useState(0)
     const [modolstatus, setStatus] = React.useState(false)
-    const [Delete,setdelete] = React.useState(false)
+    const [Delete, setdelete] = React.useState(false)
     const columns = [
-        {id: 'action', label: 'عملیات', align: "center", minWidth: 200},
+
         {
-            id: 'groupName',
-            label: 'دسته بندی',
-            minWidth: 500,
+            id: 'avatar',
+            label: 'تصویر',
+            minWidth: 50,
             align: 'center',
         },
         {
             id: 'productName',
             label: 'نام کالا',
-            minWidth: 500,
+            minWidth: 200,
             align: 'center',
         },
         {
-            id: 'avatar',
-            label: 'تصویر',
-            minWidth: 40,
+            id: 'groupName',
+            label: 'دسته بندی',
+            minWidth: 150,
             align: 'center',
         },
+        {id: 'action', label: 'عملیات', align: "center", minWidth: 150},
+
     ];
     const handleEdit = (elm) => {
         if (elm.tagName == "SPAN")
@@ -72,16 +81,17 @@ export default function StickyHeadTable(props) {
 
     const createData = (id = 0, imageSrc, productName, groupName) => {
         let action = <div>
-            <Button id={id} style={{margin: "3px"}} variant="contained" color="secondary"
+            <Button id={id} className={classes.bold} variant="contained" color="secondary"
                     onClick={(event) => handleDelete(event.target)}>
                 حذف
             </Button>
-            <Button id={id} variant="contained" color="primary"
+            <Button id={id} className={classes.bold} variant="contained" color="primary"
                     onClick={(event) => handleEdit(event.target)}>
                 ویرایش
             </Button>
         </div>
-        let avatar = <Avatar alt={productName} src={`${BASE_URL}${imageSrc}`}/>
+        let avatar = <Avatar variant="rounded" className={classes.avatar} alt={productName}
+                             src={`${BASE_URL}${imageSrc}`}/>
         return {avatar, productName, groupName, action};
     }
     const createRowsData = (data) => {
@@ -130,10 +140,10 @@ export default function StickyHeadTable(props) {
                     <TableHead>
                         <TableRow>
                             {columns.map((column) => (
-                                <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                    style={{minWidth: column.minWidth}}
+                                <TableCell className={classes.bold}
+                                           key={column.id}
+                                           align={column.align}
+                                           style={{minWidth: column.minWidth}}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -160,13 +170,18 @@ export default function StickyHeadTable(props) {
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25, 100]}
+                labelDisplayedRows={({
+                                         from,
+                                         to,
+                                         count
+                                     }) =>  ` ${from}-${to} ` +  " از " +   `  ${count !== -1 ? count : 'more than' + to}` + " "  }
                 component="div"
-                dir={"ltr"}
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onChangePage={handleChangePage}
+                labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
             <InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>
         </Paper>

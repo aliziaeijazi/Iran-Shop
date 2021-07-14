@@ -1,6 +1,7 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import {deepOrange} from '@material-ui/core/colors';
 import Logo from "../../../../../asset/images/logo.svg"
 import {Typography} from "@material-ui/core";
 
@@ -10,17 +11,17 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(1),
         },
-
     },
     square: {
-        width:"80px",
+        width:120,
+        height:50
 
     },
     title: {
         display:"flex",
-        fontFamily: "vazir",
-        alignItems:"center",
-        fontSize:30,
+        fontFamily: "IranSans",
+        fontSize:20,
+        alignItems:"center"
     }
 
 }));
@@ -30,9 +31,9 @@ function StoreName() {
 
     return (
         <div className={classes.root}>
-            <Typography className={classes.title}> فروشگاه ایران زمین</Typography>
             <Avatar variant="rounded" className={classes.square} src={Logo}>
             </Avatar>
+            <Typography className={classes.title}>فروشگاه ایران زمین</Typography>
         </div>
     );
 }

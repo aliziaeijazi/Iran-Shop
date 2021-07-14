@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './asset/style/global.css';
 import reportWebVitals from './reportWebVitals';
 import {AppRoute} from "./route/App.route";
 import {ToastContainer} from "react-toastify";
@@ -8,8 +8,6 @@ import { create } from 'jss';
 import rtl from 'jss-rtl';
 import { StylesProvider, jssPreset } from '@material-ui/core/styles';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 ReactDOM.render(
     <React.StrictMode>
         <RTL>

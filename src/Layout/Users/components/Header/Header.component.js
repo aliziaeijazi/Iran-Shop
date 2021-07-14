@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     title: {
-        fontFamily: "vazir",
+        fontFamily: "IranSans",
     },
     flex:{
         display:"flex",
@@ -38,8 +38,8 @@ function Header() {
         <div className={classes.root}>
             <AppBar className={classes.appbar} position="static">
                 <Toolbar className={classes.flex}>
-                    <NavBar/>
                     <StoreName/>
+                    <NavBar/>
                 </Toolbar>
             </AppBar>
         </div>

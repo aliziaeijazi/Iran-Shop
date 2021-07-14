@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         '& > *': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(2),
         },
         flex: 1,
 
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         '& > *': {
             margin: theme.spacing(2),
         },
-        width: "80%",
+        width: "85%",
         justifyContent: "space-between",
 
     },
@@ -40,17 +40,6 @@ const useStyles = makeStyles((theme) => ({
         flexDirection:"row"
     }
 }));
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            'vazir',
-            'BlinkMacSystemFont',
-            '"Helvetica Neue"',
-            'Arial',
-        ].join(','),
-    },
-});
-
 function Orders() {
     const classes = useStyles();
     const [kind, setkind] = React.useState('notdelivered');
@@ -58,24 +47,20 @@ function Orders() {
         setkind(event.target.value);
     };
     return (
-        <MuiThemeProvider theme={theme}>
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
-
+                        <Typography variant="h5">مدیریت سفارش ها</Typography>
                         <FormControl component="fieldset">
                             <RadioGroup aria-label="" name="Orders" value={kind}   className={classes.radiogroup} onChange={handleChange}>
-                                <FormControlLabel value="notdelivered" control={<Radio/>} label="سفارش های در انتظار ارسال"/>
                                 <FormControlLabel value="delivered" control={<Radio/>} label="سفارش های تحویل شده"/>
+                                <FormControlLabel value="notdelivered" control={<Radio/>} label="سفارش های در انتظار ارسال"/>
                             </RadioGroup>
                         </FormControl>
-                        <Typography variant="h5">مدیریت سفارش ها</Typography>
                     </div>
                     <StickyHeadTable kind={kind}/>
                 </Paper>
             </div>
-        </MuiThemeProvider>
-
     );
 
 }

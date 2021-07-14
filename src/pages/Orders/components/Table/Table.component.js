@@ -10,28 +10,30 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Button} from "@material-ui/core";
 import {FeachOrders} from "../../../../api/store.api";
+
 let bcolor
 
 const columns = [
-    {id: 'action', label: 'عملیات', align: "center", minWidth: 200},
     {
-        id: 'orderTime',
-        label: 'زمان ثبت سفارش',
-        minWidth: 300,
+        id: 'username',
+        label: 'نام کاربر',
+        minWidth: 100,
         align: 'center',
     },
     {
         id: 'sumBuying',
         label: 'مجموع مبلغ',
-        minWidth: 300,
+        minWidth: 100,
         align: 'center',
+        format: (value) => value.toLocaleString('fa-IR'),
     },
     {
-        id: 'username',
-        label: 'نام کاربر',
-        minWidth: 400,
+        id: 'orderTime',
+        label: 'زمان ثبت سفارش',
+        minWidth: 100,
         align: 'center',
-    }
+    },
+    {id: 'action', label: 'عملیات', align: "center", minWidth: 100}
 ];
 
 function createData(id = 0, orderTime, sumBuying, username) {
@@ -50,17 +52,17 @@ function createRowsData(data) {
 
 const useStyles = makeStyles({
     root: {
-        width: '80%',
+        width: '85%',
     },
     container: {
-        minHeight: 700,
-        maxHeight: 700,
+        minHeight: 800,
+        maxHeight: 800,
     },
 });
 
 const gettingData = async (setData, kind) => {
     const data = await FeachOrders(kind)
-    bcolor = (kind =="delivered" ? "primary" : "secondary" )
+    bcolor = (kind == "delivered" ? "primary" : "secondary")
     await createRowsData(data)
     setData(data)
 }
@@ -121,12 +123,14 @@ export default function StickyHeadTable(props) {
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25, 100]}
+                labelDisplayedRows={({from, to, count}) => ` ${from}-${to} ` + " از " + `  ${count !== -1 ? count : 'more than' + to}` + " "}
                 component="div"
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
                 onChangePage={handleChangePage}
+                labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
         </Paper>
     );

@@ -12,16 +12,8 @@ import {createMuiTheme} from "@material-ui/core";
 const theme = createMuiTheme({
     typography: {
         fontFamily: [
-            'vazir',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
+            "IranSans",
+            "IranYekan"
         ].join(','),
     },
     direction: "rtl",
@@ -55,7 +47,7 @@ function Login() {
             <Container component="main" maxWidth="xs" className={classes.root}>
                 <CssBaseline/>
                 <div className={classes.paper}>
-                    <Typography component="h1" variant="h5">
+                    <Typography component="h1" variant="h6">
                         ورود به پنل مدیریت فروشگاه ایران زمین
                     </Typography>
                     <form className={classes.form} noValidate>
