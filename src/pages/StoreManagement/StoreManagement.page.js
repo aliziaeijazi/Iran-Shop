@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Button, Typography} from "@material-ui/core";
@@ -41,17 +41,17 @@ const useStyles = makeStyles((theme) => ({
 
 function StoreManagement() {
     const classes = useStyles();
-
+    const saveRef = createRef()
     return (
             <div className={classes.root}>
                 <Paper className={classes.paper} elevation={5}>
                     <div className={classes.title}>
                         <Typography className={classes.bold} variant="h6">مدیریت موجودی و قیمت ها</Typography>
-                        <Button className={classes.btn} variant="contained" color="primary">
+                        <Button className={classes.btn} disabled ref={saveRef} variant="contained" color="primary" >
                             ذخیره
                         </Button>
                     </div>
-                    <StickyHeadTable></StickyHeadTable>
+                    <StickyHeadTable saveRef={saveRef}></StickyHeadTable>
                 </Paper>
             </div>
     );

@@ -22,7 +22,7 @@ export function FeachGroups() {
 
 export function CreateData(data) {
 
-    var formdata = new FormData();
+    let formdata = new FormData();
     formdata.append("name", data.name);
     formdata.append("subgroupname", data.subgroupname);
     formdata.append("image", data.newimage.files[0], data.newimage.value);
@@ -30,17 +30,13 @@ export function CreateData(data) {
     formdata.append("groupname", data.groupname);
     formdata.append("count", "0");
     formdata.append("describtion", data.describtion);
-
     return http.post("/products", formdata, {headers: {"Content-Type": "multipart/form-data"}})
-        .then((response) => toast.success(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>کالای مورد نظر با موفقیت
-            ایجاد شد.</h3>)
-        )
+        .then((response) => toast.success("کالای مورد نظر با موفقیت ایجاد شد."))
         .catch((error) => Promise.reject(error))
 }
-
 export function EditData(data) {
 
-    var formdata = new FormData();
+    let formdata = new FormData();
     formdata.append("name", data.name);
     formdata.append("subgroupname", data.subgroupname);
     if (data.newimage)
@@ -54,9 +50,7 @@ export function EditData(data) {
     formdata.append("describtion", data.describtion);
 
     return http.patch(`/products/${data.id}`, formdata, {headers: {"Content-Type": "multipart/form-data"}})
-        .then((response) => toast.success(<h3 style={{fontFamily: "Vazir", fontSize: "large"}}>کالای مورد نظر با موفقیت
-            ویرایش شد.</h3>)
-        )
+        .then((response) => toast.success("کالای مورد نظر با موفقیت ویرایش شد."))
         .catch((error) => Promise.reject(error))
 }
 
@@ -76,7 +70,14 @@ export function FeachOrders(kind) {
 
 export function DeleteProduct(id) {
     return http.delete(`/products/${id}`)
-        .then((response) => toast.success(<h3 style={{fontFamily: "vazir", fontSize: "large"}}>کالای مورد نظر با
-            موفقیت حذف شد.</h3>))
+        .then((response) => toast.success("کالای مورد نظر با موفقیت حذف شد."))
+        .catch((error) => Promise.reject(error))
+}
+export function EditPrice_Count(data , key) {
+    let formdata = new FormData();
+    formdata.append(key, data[key]);
+    return http.patch(`/products/${data.id}`, formdata, {headers: {"Content-Type": "multipart/form-data"}})
+        .then((response) => toast.success("کالای مورد نظر با موفقیت ویرایش شد.")
+        )
         .catch((error) => Promise.reject(error))
 }
