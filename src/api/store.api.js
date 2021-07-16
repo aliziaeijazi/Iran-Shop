@@ -7,7 +7,11 @@ export function FeachProducts() {
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
-
+export function FeachProductsWithFilter(fillter) {
+    return http.get(`/products?${fillter}`)
+        .then((response) => response.data)
+        .catch((error) => Promise.reject(error))
+}
 export function FeachProduct(id) {
     return http.get(`/products/${id}`)
         .then((response) => response.data)

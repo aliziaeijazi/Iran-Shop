@@ -11,7 +11,7 @@ import {BASE_URL} from "../../configs/variable.config";
 const useStyles = makeStyles({
     root: {
         width: 250,
-        height:300,
+        height:350,
     },
     cardbody:{
         display:"flex",
@@ -34,13 +34,11 @@ const useStyles = makeStyles({
     describtion:{
         display:"flex",
         flexWrap:"wrap",
-        justifyContent:"flex-end"
-
+        justifyContent:"flex-end",
     }
 });
 
 export default function Product(props) {
-    console.log(props)
     const classes = useStyles();
     const data = props.data
 
@@ -53,7 +51,7 @@ export default function Product(props) {
                     image={`${BASE_URL}${data.image}`}
                     title={data.name}
                 />
-                <CardContent className={classes.describtion}>
+                <CardContent  className={classes.describtion}>
                     <Typography className={classes.title} gutterBottom variant="h7" component="h2">
                         {data.name}
                     </Typography>
