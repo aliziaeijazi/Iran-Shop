@@ -4,7 +4,9 @@ function Users(props) {
 
     return (<div>
             <Header/>
-            {props.children}
+            <div style={{paddingTop:70}} >
+                {props.children}
+            </div>
         </div>
 
     )

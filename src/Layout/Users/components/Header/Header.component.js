@@ -11,9 +11,9 @@ import {StoreName} from "./StoreName/StoreName.component";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
-
-
+        width: "100%",
+        position:"fixed",
+        zIndex:1,
     },
     appbar: {
         backgroundColor: "white",
