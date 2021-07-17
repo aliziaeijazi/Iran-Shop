@@ -2,6 +2,7 @@ import {Redirect, BrowserRouter, Route, Switch} from "react-router-dom";
 import {Login} from "../pages/Login/Login.page";
 import {Management, Users} from "../Layout";
 import {Orders, ProductListManagement, Products, StoreManagement} from "../pages";
+import {Product} from "../pages/Product/Product.page";
 
 function AppRoute() {
     return (
@@ -38,7 +39,7 @@ function AppRoute() {
 
                 </Route>
                 <Route path="/product">
-                    <Users>productdetail</Users>
+                    <Users><Product/></Users>
                 </Route>
                 <Route path="/basket">
                     <Users>basket</Users>
