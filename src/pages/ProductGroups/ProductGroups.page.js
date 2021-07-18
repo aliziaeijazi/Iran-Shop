@@ -12,50 +12,63 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {FeachGroups, FeachProductsWithFilter} from "../../api/store.api";
 import Product from "../../components/Product/Product.component";
 import {Grid} from "@material-ui/core";
+import {PageviewOutlined} from "@material-ui/icons";
+import {Pagination} from "@material-ui/lab";
 
-const drawerWidth = 200;
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
 
     drawer: {
         width: drawerWidth,
+        position: "relative",
+        marginLeft: theme.spacing(3),
+        marginRight:"auto"
     },
     drawerPaper: {
         width: drawerWidth,
-        marginTop: 75,
+        position: "absolute",
+        zIndex: 0,
     },
     drawerContainer: {
         overflow: 'auto',
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(5),
-        backgroundColor:"#ddd",
-        justifyContent:"center"
+        display: "flex",
+        flexWrap: "wrap",
+        padding: theme.spacing(3),
+        justifyContent: "center",
+        minHeight:700,
     },
     subgroup: {
-        "&:hover":{
-            backgroundColor:"#ccc",
-            borderLeft:"2px solid red"
+        "&:hover": {
+            backgroundColor: "#ccc",
         },
-        marginRight:15,
-        borderRight:"2px solid red",
-        paddingRight:5,
-        flexGrow:1,
-        color:"black",
+        marginRight: 15,
+        paddingRight: 5,
+        flexGrow: 1,
+        color: "black",
         textAlign: "right",
-        textDecoration:"none",
-        fontSize:16
+        textDecoration: "none",
+        fontSize: 16
     },
-    group:{
-        flexGrow:1,
-        color:"red",
+    group: {
+        flexGrow: 1,
+        color: "red",
         textAlign: "right",
-        textDecoration:"none",
-        fontSize:18,
-        fontWeight:"bolder"
+        textDecoration: "none",
+        fontSize: 18,
+        fontWeight: "bolder"
+    },
+    pageination: {
+        flexGrow: 1,
+        display: "flex",
+        justifyContent: "center",
+        margin:theme.spacing(1),
+        alignItems:"flex-end"
+    },
+    product:{
+        minHeight:700,
     }
 
 }));
@@ -63,47 +76,61 @@ const useStyles = makeStyles((theme) => ({
 function ProductGroup() {
     const classes = useStyles();
     const [groups, setgroups] = React.useState([])
-    const [data , setData] = React.useState([])
+    const [data, setData] = React.useState([])
+    const [page, setPage] = React.useState(1)
+    const [count, setCount] = React.useState(1)
     useEffect(async () => {
         const groups = await FeachGroups()
         setgroups(groups)
         const url = decodeURI(document.location.href)
-        const fillter = (url.includes("subgroup") ? `subgroupname=${url.split("subgroup=")[1]}`:`groupname=${url.split("group=")[1]}`)
-        console.log(fillter)
+        const fillter = (url.includes("subgroup") ? `subgroupname=${url.split("subgroup=")[1]}` : `groupname=${url.split("group=")[1]}`)
         const data = await FeachProductsWithFilter(fillter)
         setData(data)
+        setCount(Math.ceil(data.length / countPerPage))
     }, [])
+    const countPerPage = 8
+    const handleChange = (event, value) => {
+        setPage(value);
+        console.log(value)
+    };
     return (
-        <div className={classes.root}>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-                anchor="right"
-
-            >
-                <div className={classes.drawerContainer}>
-                    {groups.map((target, index) => <List>
-
-                        <ListItem  key={index}>
-                            <a className={classes.group} href={`/products?group=${target.groupname}`}>{target.groupname}</a>
-                        </ListItem>
-                        {target.subgroup.map((subgroup) =>
-                            <ListItem key={subgroup.id}>
-                                <a className={classes.subgroup} href={`/products?subgroup=${subgroup.name}`}>{subgroup.name}</a>
-                            </ListItem>)}
-                        <Divider style={{backgroundColor:"red", fontSize:2}}/>
-                    </List>)}
-                < /div>
-            </Drawer>
             <main className={classes.content}>
-                <Grid container spacing={3} >
-                    {data.map((target)=><Grid  xs={4} item><Product data={target}/></Grid>)}
+                <Grid container spacing={2} >
+                        <Drawer
+                            className={classes.drawer}
+                            variant="permanent"
+                            classes={{
+                                paper: classes.drawerPaper,
+                            }}
+                            anchor="right"
+                        >
+                            <div className={classes.drawerContainer}>
+                                {groups.map((target, index) => <List>
+                                    <ListItem key={index}>
+                                        <a className={classes.group}
+                                           href={`/products?group=${target.groupname}`}>{target.groupname}</a>
+                                    </ListItem>
+                                    {target.subgroup.map((subgroup) =>
+                                        <ListItem key={subgroup.id}>
+                                            <a className={classes.subgroup}
+                                               href={`/products?subgroup=${subgroup.name}`}>{subgroup.name}</a>
+                                        </ListItem>)}
+                                    <Divider style={{backgroundColor: "red", fontSize: 2}}/>
+                                </List>)}
+                            < /div>
+                        </Drawer>
+                    <Grid container spacing={0} xs={8} className={classes.product}>
+                        {data.map((target, index) => {
+                            if (((page - 1) * countPerPage + 1) <= index && index <= page * countPerPage) return <Grid
+                                item><Product data={target}/></Grid>
+                        })}
+                        <Grid container className={classes.pageination} xs={10}>
+                            <Pagination count={count} page={page} shape="rounded" hidePrevButton hideNextButton
+                                        onChange={handleChange}/>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </main>
-        </div>
     );
 }
 

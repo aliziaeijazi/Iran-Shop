@@ -84,7 +84,7 @@ const Inputs=(props)=> {
             props.setrequest(false)
         }
     }
-    return <InputBase id={props.id} defaultValue={props.value} type="number"
+    return <InputBase id={props.id} defaultValue={props.value} type="number" key={props.id}
                       inputProps={{readOnly: true, style: {textAlign: "center"}}}
                       onClick={(event) => handleChangeInput(event, props.type)}
                       onKeyDown={(event) => handlekeyPress(event, props.type)}/>
