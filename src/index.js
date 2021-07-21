@@ -4,17 +4,22 @@ import './asset/style/global.css';
 import reportWebVitals from './reportWebVitals';
 import {AppRoute} from "./route/App.route";
 import {ToastContainer} from "react-toastify";
-import { create } from 'jss';
+import {create} from 'jss';
 import rtl from 'jss-rtl';
-import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+import {StylesProvider, jssPreset} from '@material-ui/core/styles';
 import 'react-toastify/dist/ReactToastify.css';
+import store from "./redux/store";
+import {Provider} from "react-redux";
+
 ReactDOM.render(
     <React.StrictMode>
         <RTL>
-            <AppRoute/>
-            <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false}
-                            closeOnClick
-                            rtl={true} pauseOnFocusLoss draggable pauseOnHover/>
+            <Provider store={store}>
+                <AppRoute/>
+                <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false}
+                                closeOnClick
+                                rtl={true} pauseOnFocusLoss draggable pauseOnHover/>
+            </Provider>
         </RTL>
     </React.StrictMode>,
     document.getElementById('root')
@@ -29,7 +34,7 @@ reportWebVitals();
 // Configure JSS
 
 function RTL(props) {
-    const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
+    const jss = create({plugins: [...jssPreset().plugins, rtl()]});
     return (
         <StylesProvider jss={jss}>
             {props.children}

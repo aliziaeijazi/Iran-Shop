@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {FeachProduct} from "../../api/store.api";
@@ -6,6 +6,9 @@ import {Button, CardMedia, InputLabel, TextField, Typography} from "@material-ui
 import {BASE_URL} from "../../configs/variable.config";
 import Grid from '@material-ui/core/Grid';
 import {AddShoppingCart} from "@material-ui/icons";
+import {connect} from "react-redux";
+import {addToBasket} from "../../redux/action/Basket.action";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         minWidth: 400,
-        maxWidth:1400,
+        maxWidth: 1400,
         margin: 20,
         padding: 10,
         display: "flex",
@@ -67,20 +70,22 @@ const useStyles = makeStyles((theme) => ({
         color: 'white',
         backgroundColor: "#ef394e",
         margin: "20px 0",
-        textAlign:"center",
+        textAlign: "center",
+        width: 200,
         "&:hover": {
             backgroundColor: "#FF5E77",
         }
     },
-    notexist:{
+    notexist: {
         display: "flex",
         fontSize: 15,
-        color:"red"
+        color: "red"
     }
 }));
 
-export function Product() {
+function ProductDetail(props) {
     const [data, setData] = useState({})
+    const [counter, setcounter] = useState(1)
     useEffect(async () => {
         const href = decodeURI(document.location.href)
         const id = href.split("id=")
@@ -88,8 +93,30 @@ export function Product() {
         setData(data)
     }, [])
     const classes = useStyles();
-    const disable = !+data.count? true : false
-    console.log(data.count , disable)
+    const disable = !+data.count ? true : false
+    const handleAddToBasket = () => {
+        // if (!props.basketList.find((target) => (target.id == data.id)))
+        //     props.addToBasket({
+        //             name: data.name,
+        //             id: data.id,
+        //             groupname: data.groupname,
+        //             subgroupname: data.subgroupname,
+        //             price: data.price,
+        //             counter: counter
+        //         }
+        //     )
+        const basket = (localStorage.getItem("BasketList")!=null ? JSON.parse(localStorage.getItem("BasketList")) : [])
+        if (!basket.find((target) => (target.id == data.id)))
+            basket.push({
+                name: data.name,
+                id: data.id,
+                groupname: data.groupname,
+                subgroupname: data.subgroupname,
+                price: data.price,
+                counter: counter
+            })
+        window.localStorage.setItem("BasketList",JSON.stringify( basket))
+    }
     return (
         <div className={classes.root}>
             <Paper elevation={20} className={classes.paper}>
@@ -111,18 +138,24 @@ export function Product() {
                         <Typography
                             className={classes.price}> {`${new Number(data.price).toLocaleString("fa-IR")} تومان`}
                         </Typography>
-                        <TextField inputProps={{style: {textAlign: "center", width: 200, fontWeight: "bolder" }, min: 1,max:data.count }}
+                        <TextField onChange={(event) => setcounter(event.target.value)} inputProps={{
+                            style: {textAlign: "center", width: 200, fontWeight: "bolder"},
+                            min: 1,
+                            max: data.count,
+                        }}
                                    type='number' aria-valuemin={1} defaultValue={1}>Count</TextField>
                         <br/>
-                        <Button disabled={disable} className={classes.btn} variant="outlined" endIcon={<AddShoppingCart/> }>
-                             افزودن به سبد خرید   
+                        <Button disabled={disable} className={classes.btn} variant="outlined"
+                                endIcon={<AddShoppingCart/>} onClick={handleAddToBasket}>
+                            افزودن به سبد خرید
                         </Button>
                         {disable && <Typography
                             className={classes.notexist}>اتمام موجودی
                         </Typography>}
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography className={classes.describtion} dangerouslySetInnerHTML={{__html:data.describtion}}></Typography>
+                        <Typography className={classes.describtion}
+                                    dangerouslySetInnerHTML={{__html: data.describtion}}></Typography>
                     </Grid>
                 </Grid>
             </Paper>
@@ -130,3 +163,17 @@ export function Product() {
     );
 }
 
+function mapStateToProps(state) {
+    return {
+        basketList: state.Basket.basketList
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToBasket: (value) => dispatch(addToBasket(value))
+    }
+}
+
+const Product = connect(mapStateToProps, mapDispatchToProps)(ProductDetail)
+export {Product}
