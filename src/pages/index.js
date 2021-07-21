@@ -1,3 +1,4 @@
+export {Payment} from "./Payment/Payment.component";
 export {Basket} from "./BuyBasket/BuyBasket.page";
 export {Product} from "./Product/Product.page";
 export {Products} from "./Products/Products.page";

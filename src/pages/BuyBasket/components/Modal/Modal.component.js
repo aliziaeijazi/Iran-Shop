@@ -115,7 +115,7 @@ export default function FinalSeeling(props) {
         else if( !(data.deliveryDate))
             toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا تاریخ تحویل را مشخص کنید.</h3>)
         else{
-            localStorage.setItem("Order" , data)
+            localStorage.setItem("Order" , JSON.stringify(data))
             // const childUrl = window.open("../../public/Payment.html", '_blank')
             // console.log(childUrl)
             // const htmlContent  = childUrl.document.open('text/html', 'replace')

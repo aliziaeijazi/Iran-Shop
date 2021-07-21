@@ -40,8 +40,8 @@ const useStyles = makeStyles({
     footer: {
         width: "90%",
         justifyContent: "space-between",
-        display:"flex",
-        alignItems:"center"
+        display: "flex",
+        alignItems: "center"
     }
 });
 const columns = [
@@ -156,19 +156,20 @@ export default function StickyHeadTable() {
     const gettingBasket = async () => {
         const Basket = await JSON.parse(localStorage.getItem("BasketList"))
         let Data = []
-        Basket.map(async (target) => {
-            const productData = await FeachProduct(target.id)
-            const data = {
-                id: target.id,
-                image: productData.image,
-                count: target.counter,
-                price: target.price,
-                name: productData.name,
-                maxCount: productData.count,
-            }
-            Data.push(data)
-            await createRowsData(Data)
-        })
+        if (Basket)
+            Basket.map(async (target) => {
+                const productData = await FeachProduct(target.id)
+                const data = {
+                    id: target.id,
+                    image: productData.image,
+                    count: target.counter,
+                    price: target.price,
+                    name: productData.name,
+                    maxCount: productData.count,
+                }
+                Data.push(data)
+                await createRowsData(Data)
+            })
 
     }
     useEffect(async () => {
@@ -244,11 +245,12 @@ export default function StickyHeadTable() {
                 />
                 {/*<InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>*/}
             </Paper>
-            <div className={classes.footer}><Typography className={classes.bold} variant="h6">{`مبلغ کل: ${Sum} تومان`}</Typography>
-                <Button className={classes.buying} variant="contained" color="primary" onClick={()=>setStatus(true)}>
+            <div className={classes.footer}><Typography className={classes.bold}
+                                                        variant="h6">{`مبلغ کل: ${Sum} تومان`}</Typography>
+                <Button className={classes.buying} variant="contained" color="primary" onClick={() => setStatus(true)}>
                     نهایی کردن خرید
                 </Button></div>
-            <FinalSeeling open={modolstatus} falsemodal={falsemodal} />
+            <FinalSeeling open={modolstatus} falsemodal={falsemodal}/>
         </div>
 
     );
