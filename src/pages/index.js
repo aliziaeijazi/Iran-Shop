@@ -1,3 +1,4 @@
+export {Basket} from "./BuyBasket/BuyBasket.page";
 export {Product} from "./Product/Product.page";
 export {Products} from "./Products/Products.page";
 export {Orders} from "./Orders/Orders.page";

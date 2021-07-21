@@ -3,6 +3,7 @@ import {Login} from "../pages/Login/Login.page";
 import {Management, Users} from "../Layout";
 import {Orders, ProductGroup, ProductListManagement, Products, StoreManagement} from "../pages";
 import {Product} from "../pages/Product/Product.page";
+import {Basket} from "../pages/";
 
 function AppRoute() {
     return (
@@ -42,7 +43,7 @@ function AppRoute() {
                     <Users><Product/></Users>
                 </Route>
                 <Route path="/basket">
-                    <Users>basket</Users>
+                    <Users><Basket/></Users>
 
                 </Route>
                 <Route path="/cheackout">
