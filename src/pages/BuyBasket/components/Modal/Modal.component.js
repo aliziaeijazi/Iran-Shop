@@ -9,6 +9,8 @@ import Select from '@material-ui/core/Select';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import {CreateData, EditData, FeachGroups, FeachProduct} from "../../../../api/store.api";
 import {toast} from "react-toastify";
+import {useHistory} from "react-router-dom"
+
 
 
 function getModalStyle() {
@@ -26,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         position: 'absolute',
         width: 500,
-        height: 600,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid gray',
         boxShadow: theme.shadows[5],
@@ -51,9 +52,13 @@ const useStyles = makeStyles((theme) => ({
     },
     fieldmargin: {
         margin: theme.spacing(3, 0, 1),
+        minWidth: 500,
+
     },
     submit: {
-        width: "100px"
+        width: 200,
+        display:"flex",
+        alignSelf:"center"
     },
 
 
@@ -62,23 +67,19 @@ const theme = createMuiTheme({
     direction: "rtl"
 });
 
-export default function InsertProduct(props) {
+export default function FinalSeeling(props) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
     const [data, setdata] = React.useState({
             "name": "",
-            "subgroupname": "",
-            "price": "0",
-            "groupname": "",
-            "count": "0",
-            "image": "",
-            "newimage": "",
-            "describtion": "",
-            "id": 0
+            "family": "",
+            "address": "",
+            "phoneNumber": "",
+            "deliveryDate": "",
         }
     )
-    const [groups, setgroups] = React.useState([])
+    const history = useHistory()
     const [state, setState] = React.useState();
     const handleChangeData = async (key, value) => {
         await setdata({
@@ -87,14 +88,6 @@ export default function InsertProduct(props) {
         )
     }
 
-    const handleChange = async (event) => {
-        const group = event.target.value.split("/")
-        setState(event.target.value)
-        await setdata({
-                ...data, "groupname": group[0], "subgroupname": group[1]
-            }
-        )
-    };
     const handleOpen = () => {
         setOpen(true);
     };
@@ -102,45 +95,35 @@ export default function InsertProduct(props) {
     const handleClose = () => {
         setOpen(false);
         setdata({})
-        setState()
         props.falsemodal()
     };
+
     useEffect(async () => {
-        const groups = await FeachGroups()
-        setgroups(groups)
-    }, [])
-    useEffect(async () => {
-        if (props.id) {
-            const data = await FeachProduct(props.id)
-            setdata(data)
-            setState(`${data.groupname}/${data.subgroupname}`)
-        }
         if (props.open) {
             setOpen(true)
         }
     }, [props.open])
     const handleSubmit = async() => {
         if( !data.name )
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام کالا را وارد کنید.</h3>)
-        else if( !data.groupname  )
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا گروه کالا را انتخاب کنید.</h3>)
-        else if(!data.describtion )
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا توضیحاتی را درمورد کالا  وارد کنید.</h3>)
-        else if( !(data.image || data.newimage))
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا عکسی را برای  کالا انتخاب  کنید.</h3>)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام خود را وارد کنید.</h3>)
+        else if( !data.family  )
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام خانوادگی خود را وارد  کنید.</h3>)
+        else if(!data.address )
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا آدرس خود را وارد کنید.</h3>)
+        else if( !(data.phoneNumber))
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا شماره تلفن همراه خود را وارد کنید.</h3>)
+        else if( !(data.deliveryDate))
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا تاریخ تحویل را مشخص کنید.</h3>)
         else{
-            if (props.id) {
-                await EditData(data)
-            } else{
-                await CreateData(data)
-            }
-            handleClose()
+            localStorage.setItem("Order" , data)
+            // const childUrl = window.open("../../public/Payment.html", '_blank')
+            // console.log(childUrl)
+            // const htmlContent  = childUrl.document.open('text/html', 'replace')
+            // console.log(htmlContent)
+            // childUrl.document.write(htmlContent)
         }
+    }
 
-    }
-    const handleInputFile = (value) => {
-        handleChangeData("newimage", value)
-    }
 
     return (
         <div>
@@ -152,36 +135,24 @@ export default function InsertProduct(props) {
             >
                 <MuiThemeProvider theme={theme}>
                     <div style={modalStyle} className={`${classes.paper} ${classes.modalroot}`}>
-                        <Typography variant="h5">افزودن/ویرایش کالا</Typography>
+                        <Typography variant="h5">نهایی کردن خرید</Typography>
                         <Button type="button" onClick={handleClose}>
                             X
                         </Button>
                         <FormControl component="fieldset">
-                            <FormLabel >تصویر کالا</FormLabel>
-                            <TextField dir={"ltr"} accept="image/*" color="primary" id={"image"}
-                                       onChange={(event) => handleInputFile(event.target)} type="file"/>
-                            <TextField required id="name" label="نام کالا" className={classes.fieldmargin}
-                                       onChange={(event) => handleChangeData("name", event.target.value)}
-                                       defaultValue={data.name}/>
-                            <FormControl   required className={`${classes.formControl} ${classes.fieldmargin}`}>
-                                <InputLabel >دسته بندی:</InputLabel>
-                                <Select
-                                    native
-                                    value={state}
-                                    onChange={handleChange}
-                                >
-                                    <option aria-label="None" value=""/>
-                                    {groups.map((target) => target.subgroup.map((subgroup) => <option key={subgroup.id}
-                                                                                                      value={`${target.groupname}/${subgroup.name}`}>{`${target.groupname}/${subgroup.name}`}</option>))}
-                                </Select>
-                            </FormControl>
-                            <FormLabel className={classes.fieldmargin} dir={"rtl"}>توضیحات :</FormLabel>
-                            <TextareaAutosize style={{fontFamily: "Vazir", height : 200}} defaultValue={data.describtion} required
-                                              className={classes.describtionTextArea}
-                                              onChange={(event) => handleChangeData("describtion", event.target.value)}/>
-                            <Button variant="contained" onClick={handleSubmit} color="primary"
+                            <TextField required id="name" label="نام" className={classes.fieldmargin}
+                                       onChange={(event) => handleChangeData("name", event.target.value)}/>
+                            <TextField required id="family" label=" نام خانوادگی :" className={classes.fieldmargin}
+                                       onChange={(event) => handleChangeData("family", event.target.value)}/>
+                            <TextField required id="address" label="آدرس" className={classes.fieldmargin}
+                                       onChange={(event) => handleChangeData("address", event.target.value)}/>
+                            <TextField required id="phoneNumber" label="تلفن همراه:(جهت هماهنگی ارسال سفارش)" className={classes.fieldmargin} type={"number"}
+                                       onChange={(event) => handleChangeData("phoneNumber", event.target.value)}/>
+                            <TextField required id="deliveryDate" label="تاریخ تحویل :" className={classes.fieldmargin}
+                                       onChange={(event) => handleChangeData("deliveryDate", event.target.value)}/>
+                            <Button variant="contained"  onClick={handleSubmit} color="primary"
                                     className={classes.submit}>
-                                ذخیره
+                                پرداخت
                             </Button>
                         </FormControl>
                     </div>

@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import {Avatar, Button, InputBase, Typography} from "@material-ui/core";
 import {DeleteProduct, FeachProduct, FeachProducts} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
+import FinalSeeling from "../Modal/Modal.component";
 
 const useStyles = makeStyles({
     root: {
@@ -185,11 +186,9 @@ export default function StickyHeadTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    // const falsemodal = () => {
-    //     props.falsemodal()
-    //     setStatus(false)
-    //     setId(0)
-    // }
+    const falsemodal = () => {
+        setStatus(false)
+    }
 
     const rows = data
     return (
@@ -246,9 +245,11 @@ export default function StickyHeadTable() {
                 {/*<InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>*/}
             </Paper>
             <div className={classes.footer}><Typography className={classes.bold} variant="h6">{`مبلغ کل: ${Sum} تومان`}</Typography>
-                <Button className={classes.buying} variant="contained" color="primary">
+                <Button className={classes.buying} variant="contained" color="primary" onClick={()=>setStatus(true)}>
                     نهایی کردن خرید
                 </Button></div>
+            <FinalSeeling open={modolstatus} falsemodal={falsemodal} />
         </div>
+
     );
 }
