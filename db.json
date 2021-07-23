@@ -105,7 +105,7 @@
       "subgroupname": "asus",
       "price": "25100000",
       "groupname": "لپتاپ",
-      "count": "04",
+      "count": "1",
       "describtion": "ظرفیت حافظه RAM:\n8 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nNVIDIA\nاندازه صفحه نمایش:\n15.6 اینچ\nطبقه‌بندی:\nمخصوص بازی، کاربری مالتی‌مدیا، کاربری عمومی\nسری پردازنده:\nRyzen 7\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون سیستم‌عامل\nپورت HDMI:\nدارد",
       "image": "/files/ef2596045cdc3f023e3678dd654352f4",
       "createdAt": 1626208455650,
@@ -270,7 +270,7 @@
       "subgroupname": "شیائومی",
       "price": "6590000",
       "groupname": "موبایل",
-      "count": "9",
+      "count": "2",
       "describtion": "حافظه داخلی:\n256 گیگابایت\nشبکه های ارتباطی:\n4G، 3G، 2G\nدوربین‌های پشت گوشی:\n4 ماژول دوربین\nسیستم عامل:\nAndroid\nتوضیحات سیم کارت:\nسایز نانو (8.8 × 12.3 میلی‌متر)\nمقدار RAM:\n8 گیگابایت\nرزولوشن عکس:\n48 مگاپیکسل\nنسخه سیستم عامل:\nAndroid 11\nفناوری صفحه‌نمایش:\nIPS\nویژگی‌های خاص:\nمجهز به حس‌گر اثرانگشت ، مناسب عکاسی ، مناسب عکاسی سلفی ، مناسب بازی ، دارای بدنه مقاوم\nاندازه:\n6.67\nتعداد سیم کارت:\nدو",
       "image": "/files/d889a71c2d33fcb5c181e62b0d413a14",
       "createdAt": 1626211122315,
@@ -289,6 +289,67 @@
     }
   ],
   "orders": [
-
+    {
+      "name": "علی",
+      "family": "ضیایی جزی",
+      "phone": "09133282279",
+      "deliveryTime": "1400/05/20",
+      "sumBuying": 0,
+      "endDeliveriTime": "sadfsfsdfsdfasfsdfs",
+      "status": "true",
+      "product": [
+        {
+          "name": "لپتاپ 15 اینچی ایسوس مدل TUF FX505DT-HN665",
+          "id": 2,
+          "groupname": "لپتاپ",
+          "subgroupname": "asus",
+          "price": "25100000",
+          "counter": "3"
+        },
+        {
+          "name": "گوشی موبایل شیائومی مدل POCO X3 Pro M2102J20SG دو سیم‌ کارت ظرفیت 256 گیگابایت و 8 گیگابایت رم",
+          "id": 17,
+          "groupname": "موبایل",
+          "subgroupname": "شیائومی",
+          "price": "6590000",
+          "counter": "7"
+        }
+      ],
+      "orderTime": "",
+      "createdAt": 1627041450864,
+      "id": 1,
+      "endDeliveryTime": "sadfsfsdfsdfasfsdfs"
+    },
+    {
+      "name": "علی",
+      "family": "ضیایی جزی",
+      "phone": "09133282279",
+      "deliveryTime": "1400/05/20",
+      "sumBuying": 67987869876,
+      "endDeliveriTime": "0987089876987",
+      "status": "true",
+      "address": "fdsafdsa",
+      "product": [
+        {
+          "name": "لپتاپ 15 اینچی ایسوس مدل TUF FX505DT-HN665",
+          "id": 2,
+          "groupname": "لپتاپ",
+          "subgroupname": "asus",
+          "price": "25100000",
+          "counter": "3"
+        },
+        {
+          "name": "گوشی موبایل شیائومی مدل POCO X3 Pro M2102J20SG دو سیم‌ کارت ظرفیت 256 گیگابایت و 8 گیگابایت رم",
+          "id": 17,
+          "groupname": "موبایل",
+          "subgroupname": "شیائومی",
+          "price": "6590000",
+          "counter": "7"
+        }
+      ],
+      "orderTime": "12342342",
+      "createdAt": 1627041450867,
+      "id": 2
+    }
   ]
 }

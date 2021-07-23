@@ -70,6 +70,11 @@ export function FeachOrders(kind) {
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+export function FeachOrdersById(id) {
+    return http.get(`/orders/${id}`)
+        .then((response) => response.data)
+        .catch((error) => Promise.reject(error))
+}
 export function DeleteProduct(id) {
     return http.delete(`/products/${id}`)
         .then((response) => toast.success("کالای مورد نظر با موفقیت حذف شد."))
@@ -83,9 +88,14 @@ export function EditPrice_Count(data , key) {
         )
         .catch((error) => Promise.reject(error))
 }
+export function EditOrdersData(data) {
+    return http.patch(`/orders/${data.id}`, data)
+        .then((response) =>response.data)
+        .catch((error) => Promise.reject(error))
+}
 
 export function AddOrder(data) {
-    return http.post("/orders",data , )
+    return http.post("/orders",data )
         .then((response) => toast.success("سفارش شما با موفقیت ثبت شد."))
         .catch((error) => Promise.reject(error))
 }

@@ -9,40 +9,47 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Button} from "@material-ui/core";
-import {FeachOrders} from "../../../../api/store.api";
+import {FeachOrders, FeachOrdersById} from "../../../../api/store.api";
 import Detail from "../Modal/Modal.component";
 
 
 const columns = [
     {
-        id: 'username',
-        label: 'نام کاربر',
+        id: 'name',
+        label: 'کالا',
         minWidth: 100,
         align: 'center',
     },
     {
-        id: 'sumBuying',
-        label: 'مجموع مبلغ(تومان)',
+        id: 'price',
+        label: 'قیمت (تومان)',
+        minWidth: 100,
+        align: 'center',
+        format: (value) => parseInt(value).toLocaleString('fa-IR'),
+    },
+    {
+        id: 'counter',
+        label: 'تعداد',
         minWidth: 100,
         align: 'center',
         format: (value) => value.toLocaleString('fa-IR'),
     },
     {
-        id: 'orderTime',
-        label: 'زمان ثبت سفارش',
+        id: 'sum',
+        label: 'مجموع مبلغ(تومان)',
         minWidth: 100,
         align: 'center',
+        format: (value) => value.toLocaleString('fa-IR'),
     },
-    {id: 'action', label: 'عملیات', align: "center", minWidth: 130}
 ];
 
 const useStyles = makeStyles({
     root: {
-        width: '90%',
+        width: '98%',
     },
     container: {
-        minHeight: "73vh",
-        maxHeight: "73vh",
+        minHeight: "40vh",
+        maxHeight: "40vh",
     },
     bold: {
         fontWeight: "bolder",
@@ -51,45 +58,30 @@ const useStyles = makeStyles({
 
 
 let bcolor
-export default function StickyHeadTable(props) {
+export default function ProductTable(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [data, setData] = React.useState([])
-    const [modalStatus, setModalStatus] = React.useState(false)
-    const [id, setId] = React.useState(0)
-    const handleClick = (event) => {
-        if (event.target.tagName == "SPAN")
-            setId(event.target.parentNode.id)
-        else
-            setId(event.target.id)
-        setModalStatus(true)
-    }
-
-    function createData(id = 0, orderTime, sumBuying, username) {
-        let action = <Button id={id} variant="contained" color={bcolor} onClick={handleClick}>
-            بررسی سفارش
-        </Button>
-
-        return {username, sumBuying, orderTime, action};
+    function createData(id = 0,name, price, counter) {
+        const sum = price*counter
+        return {name, price, counter, sum};
     }
 
 
     function createRowsData(data) {
-        const rows = data.map((target) => createData(target.id, target.orderTime, target.sumBuying, target.name))
+        const rows = data.map((target) => createData(target.id, target.name, +target.price, +target.counter))
         setData(rows)
     }
-    const gettingData = async (kind) => {
-        const data = await FeachOrders(kind)
-        bcolor = (kind == "delivered" ? "primary" : "secondary")
+
+    const creatingData = async () => {
+        const data = props.product ?props.product :[]
         await createRowsData(data)
     }
     useEffect(() => {
-        gettingData(setData, props.kind)
-    }, [])
-    useEffect(() => {
-        gettingData(props.kind)
-    }, [props.kind])
+        creatingData()
+
+    }, [props.product])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -150,10 +142,6 @@ export default function StickyHeadTable(props) {
                 onChangePage={handleChangePage}
                 labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
-            <Detail open={modalStatus} id={id} falsemodal={() => {
-                setModalStatus(false)
-                setId(0)
-            }}/>
         </Paper>
     );
 }
