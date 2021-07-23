@@ -1,3 +1,4 @@
+const  html =  "payment.html"
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -6,6 +7,7 @@ const fs = require('fs')
 const path = require('path')
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
+
 
 // Set default middlewares (logger, static, cors and no-cache)
 server.use(middlewares)
@@ -31,7 +33,9 @@ server.get('/files/:file_id', (req, res, next) => {
   res.set('Content-Type', 'image/jpeg')
   res.sendFile(path.join(__dirname, 'uploads/'+file_id))
 })
-
+server.get('/payment', (req,res)=>{
+  res.sendFile(__dirname +'/'+  html)
+})
 // To handle POST, PUT and PATCH you need to use a body-parser
 // You can use the one used by JSON Server
 server.use(jsonServer.bodyParser)
