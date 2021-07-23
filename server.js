@@ -1,4 +1,4 @@
-const  html =  "payment.html"
+const  html =  "/public/payment.html"
 const jsonServer = require('json-server')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')

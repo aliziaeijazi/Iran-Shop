@@ -29,7 +29,7 @@ function Payment() {
     }
     useEffect(async () => {
         const statusFromServer = document.location.href.split("status=")[1]
-        setStatus(statusFromServer ? "successfull" : "failed")
+        setStatus(statusFromServer=="true" ? "successfull" : "failed")
         if (status) {
             const Basket = await JSON.parse(localStorage.getItem("BasketList"))
 

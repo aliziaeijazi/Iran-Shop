@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>درگاه پرداخت</title>
+</head>
+<body>
+<div class="payment">
+    <img class="photo" src="./payment.png" alt="payment"/>
+    <button class="btn successbtn" onclick="success()">تایید</button>
+    <button class="btn faildbtn" onclick="faild()">انصراف</button>
+</div>
+
+<script>
+    const success = () => {
+        window.open("http://localhost:3000/paymentresult?status=true","_self")
+    }
+    const faild = () => {
+        window.open("http://localhost:3000/paymentresult?status=false","_self")
+    }
+</script>
+<style>
+    body{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .payment{
+        width: 1000px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+    }
+    .photo{
+        width:1000px
+    }
+    .btn{
+        margin: 20px;
+        height: 50px;
+        width: 150px;
+        border: none;
+        border-radius: 5px;
+        font-family:"2  Yekan";
+        font-size: 20px;
+    }
+    .successbtn{
+
+        background-color:green;
+
+    }
+    .faildbtn{
+        background-color:red;
+    }
+</style>
+</body>
+</html>
