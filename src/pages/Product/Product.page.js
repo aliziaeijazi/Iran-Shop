@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import {AddShoppingCart} from "@material-ui/icons";
 import {connect} from "react-redux";
 import {addToBasket} from "../../redux/action/Basket.action";
+import {toast} from "react-toastify";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -95,18 +96,8 @@ function ProductDetail(props) {
     const classes = useStyles();
     const disable = !+data.count ? true : false
     const handleAddToBasket = () => {
-        // if (!props.basketList.find((target) => (target.id == data.id)))
-        //     props.addToBasket({
-        //             name: data.name,
-        //             id: data.id,
-        //             groupname: data.groupname,
-        //             subgroupname: data.subgroupname,
-        //             price: data.price,
-        //             counter: counter
-        //         }
-        //     )
         const basket = (localStorage.getItem("BasketList")!=null ? JSON.parse(localStorage.getItem("BasketList")) : [])
-        if (!basket.find((target) => (target.id == data.id)))
+        if (!basket.find((target) => (target.id == data.id))){
             basket.push({
                 name: data.name,
                 id: data.id,
@@ -115,6 +106,12 @@ function ProductDetail(props) {
                 price: data.price,
                 counter: counter
             })
+            toast.success(<h4>کالای مورد نظر به سبد خرید شما اضافه شد.</h4>)
+        }
+        else{
+            toast.error(<h4>کالای مورد نظر قبلا به سبد خرید اضافه شده است.</h4>)
+        }
+
         window.localStorage.setItem("BasketList",JSON.stringify( basket))
     }
     return (

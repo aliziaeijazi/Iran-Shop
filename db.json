@@ -94,7 +94,7 @@
       "subgroupname": "asus",
       "price": "11980000",
       "groupname": "لپتاپ",
-      "count": "8",
+      "count": "5",
       "describtion": "ظرفیت حافظه RAM:\n4 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nIntel\nاندازه صفحه نمایش:\n15.6 اینچ\nسری پردازنده:\nCore i3\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون سیستم‌عامل\nپورت HDMI:\nدارد",
       "image": "/files/93621ead8139f58a5390233f97e7dcdd",
       "createdAt": 1626208392984,
@@ -127,7 +127,7 @@
       "subgroupname": "asus",
       "price": "11950000",
       "groupname": "لپتاپ",
-      "count": "12",
+      "count": "8",
       "describtion": "ظرفیت حافظه RAM:\n16 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nNVIDIA\nاندازه صفحه نمایش:\n14 اینچ\nطبقه‌بندی:\nکاربری مالتی‌مدیا، کاربری عمومی، باریک و سبک\nسری پردازنده:\nRyzen 7\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون ویندوز\nپورت HDMI:\nدارد",
       "image": "/files/644f002717ec9f0f434688d097637d74",
       "createdAt": 1626208984195,
@@ -237,7 +237,7 @@
       "subgroupname": "سن دیسک",
       "price": "78700",
       "groupname": "هارد و فلش",
-      "count": "20",
+      "count": "0",
       "describtion": "رابط:\nUSB 2.0\nظرفیت:\n16 گیگابایت\nمقاومت در برابر آب:\nخیر\nمقاومت در برابر ضربه:\nخیر\nمقاومت در برابر شوک و لرزش:\nخیر\nضد خش:\nخیر",
       "image": "/files/f1305181b652e09d288b2b733b8e8d23",
       "createdAt": 1626210973430,
@@ -290,12 +290,12 @@
   ],
   "orders": [
     {
-      "name": "علی",
+      "name": "امید",
       "family": "ضیایی جزی",
-      "phone": "09133282279",
-      "deliveryTime": "1400/05/02",
-      "sumBuying": 68097000,
-      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۲:۴۰:۰۱",
+      "phone": "09133382279",
+      "deliveryTime": "1400/05/06",
+      "sumBuying": 55,
+      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۳۸:۵۴",
       "status": "true",
       "product": [
         {
@@ -304,12 +304,64 @@
           "groupname": "لپتاپ",
           "subgroupname": "asus",
           "price": "22699000",
-          "counter": "3"
+          "counter": "4"
+        },
+        {
+          "name": "فلش مموری سن دیسک مدل Cruzer Blade CZ50 ظرفیت 16 گیگابایت",
+          "id": 14,
+          "groupname": "هارد و فلش",
+          "subgroupname": "سن دیسک",
+          "price": "78700",
+          "counter": "20"
         }
       ],
-      "address": "اصفهان گز برخوار خیابان سجاد. بن بست صبا پلاک 31",
-      "createdAt": 1627163956588,
+      "address": "اصفهان گزبرخوار بلوار شهدا",
+      "createdAt": 1627167955886,
       "id": 1
+    },
+    {
+      "name": "علی",
+      "family": "ضیایی جزی",
+      "phone": "5",
+      "deliveryTime": "5",
+      "sumBuying": 1574000,
+      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۴۰:۰۷",
+      "status": "true",
+      "product": [
+        {
+          "name": "فلش مموری سن دیسک مدل Cruzer Blade CZ50 ظرفیت 16 گیگابایت",
+          "id": 14,
+          "groupname": "هارد و فلش",
+          "subgroupname": "سن دیسک",
+          "price": "78700",
+          "counter": "20"
+        }
+      ],
+      "address": "55",
+      "createdAt": 1627168184786,
+      "id": 2
+    },
+    {
+      "name": "حسین ",
+      "family": "سلامی",
+      "phone": "09911122279",
+      "deliveryTime": "1400/05/07",
+      "sumBuying": 47800000,
+      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۴۶:۰۸",
+      "status": "true",
+      "product": [
+        {
+          "name": "لپ تاپ 15.6 اینچی ایسوس مدل R565MA-BQ197",
+          "id": 4,
+          "groupname": "لپتاپ",
+          "subgroupname": "asus",
+          "price": "11950000",
+          "counter": "4"
+        }
+      ],
+      "address": "اصفهان",
+      "createdAt": 1627168553377,
+      "id": 3
     }
   ]
 }

@@ -45,9 +45,14 @@ function Payment() {
                     product: Basket,
                     address:Order.address
                 }
-                AddOrder(Data)
-                localStorage.removeItem("BasketList")
-                localStorage.removeItem("Order")
+                try{
+                    await AddOrder(Data)
+                    localStorage.removeItem("BasketList")
+                    localStorage.removeItem("Order")
+                }catch (e){
+                    console.log("errrod" , e)
+                }
+
             }
         }
     })

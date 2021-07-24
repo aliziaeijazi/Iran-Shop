@@ -38,7 +38,6 @@ const useStyles = makeStyles({
         minWidth: 90,
     },
     footer: {
-        width: "90%",
         justifyContent: "space-between",
         display: "flex",
         alignItems: "center"
@@ -193,8 +192,8 @@ export default function StickyHeadTable() {
 
     const rows = data
     return (
-        <div>
-            <Paper className={classes.root}>
+        <div className={classes.root}>
+            <Paper>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>

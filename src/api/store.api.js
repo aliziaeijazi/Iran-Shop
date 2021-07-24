@@ -101,6 +101,7 @@ export function EditOrdersData(data) {
 }
 
 export function AddOrder(data) {
+    console.log(data)
     return http.post("/orders", data)
         .then((response) => toast.success("سفارش شما با موفقیت ثبت شد."))
         .catch((error) => Promise.reject(error))
