@@ -49,6 +49,7 @@ function Payment() {
                     await AddOrder(Data)
                     localStorage.removeItem("BasketList")
                     localStorage.removeItem("Order")
+                    document.location.reload()
                 }catch (e){
                     console.log("errrod" , e)
                 }

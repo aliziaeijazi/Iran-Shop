@@ -108,6 +108,8 @@ export default function StickyHeadTable() {
         else
             await DeleteFromBasket(+elm.id)
         changing(true)
+        document.location.reload()
+
 
     }
     const find = (data, id) => {

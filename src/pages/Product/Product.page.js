@@ -107,6 +107,7 @@ function ProductDetail(props) {
                 counter: counter
             })
             toast.success(<h4>کالای مورد نظر به سبد خرید شما اضافه شد.</h4>)
+            document.location.reload()
         }
         else{
             toast.error(<h4>کالای مورد نظر قبلا به سبد خرید اضافه شده است.</h4>)
