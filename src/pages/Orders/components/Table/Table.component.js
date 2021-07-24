@@ -76,9 +76,10 @@ export default function StickyHeadTable(props) {
 
 
     function createRowsData(data) {
-        const rows = data.map((target) => createData(target.id, target.orderTime, target.sumBuying, target.name))
+        const rows = data.map((target) => createData(target.id, new Date(target.createdAt).toLocaleString('fa-IR'), target.sumBuying, `${target.name} ${target.family}`))
         setData(rows)
     }
+
     const gettingData = async (kind) => {
         const data = await FeachOrders(kind)
         bcolor = (kind == "delivered" ? "primary" : "secondary")

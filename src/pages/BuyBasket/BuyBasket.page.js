@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Button, Typography} from "@material-ui/core";
@@ -30,18 +30,29 @@ const useStyles = makeStyles((theme) => ({
     },
     bold:{
         fontWeight:"bolder"
+    },
+    empty:{
+        color :"red",
+        fontWeight:"bolder"
     }
 }));
 
 function Basket() {
     const classes = useStyles();
+    const [basketStatus, setBasketStatus] = React.useState(false)
+    useEffect(async ()=>{
+        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
+        if(Basket)
+            setBasketStatus(true)
+    })
     return (
         <div className={classes.root}>
             <Paper className={classes.paper} elevation={5}>
                 <div className={classes.title}>
                     <Typography className={classes.bold}  variant="h6" > سبد خرید</Typography>
                 </div>
-                <StickyHeadTable />
+                {basketStatus && <StickyHeadTable />}
+                {!basketStatus && <Typography className={classes.empty}  variant="h6" > سبد خرید شما خالی است.لطفا ابتدا کالاهای مورد نظر خود را انتخاب کنید.</Typography>}
             </Paper>
         </div>
 

@@ -14,25 +14,23 @@ function Payment() {
     }
     const [status, setStatus] = useState("failed")
     // const [requset , setrequest] = useState([])
-    const calculateSum_UpdateCount = (data) => {
+    const calculateSum_UpdateCount = async (data) => {
         let Sum = 0
-        data.map(async (target) => {
+        for(let i = 0 ; i<data.length ; i++)
+        {
+            const target = data[i]
             const productDetail = await FeachProduct(target.id)
-            // const requests = requset
-            // requests.push( {id:target.id , count:productDetail.count - target.counter})
-            // setrequest(requests)
             EditPrice_Count({id:target.id , count:productDetail.count - target.counter}, "count")
             Sum += target.counter * target.price
-        })
+        }
         return Sum
 
     }
     useEffect(async () => {
         const statusFromServer = document.location.href.split("status=")[1]
         setStatus(statusFromServer=="true" ? "successfull" : "failed")
-        if (status) {
+        if (status == "successfull") {
             const Basket = await JSON.parse(localStorage.getItem("BasketList"))
-
             const Order = await JSON.parse(localStorage.getItem("Order"))
             if (Order && Basket) {
                 const Sum = await calculateSum_UpdateCount(Basket)
@@ -45,16 +43,14 @@ function Payment() {
                     endDeliveriTime: "",
                     status: "false",
                     product: Basket,
-                    orderTime: '',
+                    address:Order.address
                 }
                 AddOrder(Data)
                 localStorage.removeItem("BasketList")
                 localStorage.removeItem("Order")
             }
-
         }
     })
-    console.log(data)
     return (
         <div style={{
             display: "flex",

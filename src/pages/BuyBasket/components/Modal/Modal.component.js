@@ -12,7 +12,6 @@ import {toast} from "react-toastify";
 import {useHistory} from "react-router-dom"
 
 
-
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -57,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         width: 200,
-        display:"flex",
-        alignSelf:"center"
+        display: "flex",
+        alignSelf: "center"
     },
 
 
@@ -77,6 +76,7 @@ export default function FinalSeeling(props) {
             "address": "",
             "phoneNumber": "",
             "deliveryDate": "",
+            "orderTime": "",
         }
     )
     const history = useHistory()
@@ -103,24 +103,24 @@ export default function FinalSeeling(props) {
             setOpen(true)
         }
     }, [props.open])
-    const handleSubmit = async() => {
-        if( !data.name )
+    const handleSubmit = async () => {
+        if (!data.name)
             toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام خود را وارد کنید.</h3>)
-        else if( !data.family  )
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام خانوادگی خود را وارد  کنید.</h3>)
-        else if(!data.address )
+        else if (!data.family)
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا نام خانوادگی خود را وارد
+                کنید.</h3>)
+        else if (!data.address)
             toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا آدرس خود را وارد کنید.</h3>)
-        else if( !(data.phoneNumber))
-            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا شماره تلفن همراه خود را وارد کنید.</h3>)
-        else if( !(data.deliveryDate))
+        else if (!(data.phoneNumber))
+            toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا شماره تلفن همراه خود را وارد
+                کنید.</h3>)
+        else if (!(data.deliveryDate))
             toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا تاریخ تحویل را مشخص کنید.</h3>)
-        else{
-            await localStorage.setItem("Order" , JSON.stringify(data))
-            window.open("http://localhost:3005/payment","_self")
+        else {
+            await localStorage.setItem("Order", JSON.stringify(data))
+            window.open("http://localhost:3005/payment", "_self")
         }
     }
-
-
     return (
         <div>
             <Modal
@@ -142,11 +142,12 @@ export default function FinalSeeling(props) {
                                        onChange={(event) => handleChangeData("family", event.target.value)}/>
                             <TextField required id="address" label="آدرس" className={classes.fieldmargin}
                                        onChange={(event) => handleChangeData("address", event.target.value)}/>
-                            <TextField required id="phoneNumber" label="تلفن همراه:(جهت هماهنگی ارسال سفارش)" className={classes.fieldmargin} type={"number"}
+                            <TextField required id="phoneNumber" label="تلفن همراه:(جهت هماهنگی ارسال سفارش)"
+                                       className={classes.fieldmargin} type={"number"}
                                        onChange={(event) => handleChangeData("phoneNumber", event.target.value)}/>
                             <TextField required id="deliveryDate" label="تاریخ تحویل :" className={classes.fieldmargin}
                                        onChange={(event) => handleChangeData("deliveryDate", event.target.value)}/>
-                            <Button variant="contained"  onClick={handleSubmit} color="primary"
+                            <Button variant="contained" onClick={handleSubmit} color="primary"
                                     className={classes.submit}>
                                 پرداخت
                             </Button>

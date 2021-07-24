@@ -99,11 +99,12 @@ export default function Detail(props) {
         }
     }, [props.open])
     const handlesend = async()=>{
-        await EditOrdersData({ id: data.id ,status:"true" , endDeliveryTime: "sadfsfsdfsdfasfsdfs"})
+        const time = await  new Date()
+        await EditOrdersData({ id: data.id ,status:"true" , endDeliveriTime: time.toLocaleString('fa-IR')})
         toast.success(<h4>وضعیت سفارش به تحویل نهایی تغییر پیدا کرد.</h4>)
         handleClose()
     }
-
+    const time = new Date(data.createdAt)
     return (
         <div>
             <Modal
@@ -136,7 +137,7 @@ export default function Detail(props) {
                             </div>
                             <div className={classes.row}>
                                 <Typography className={classes.title}>زمان سفارش : </Typography>
-                                <Typography>{data.orderTime}</Typography>
+                                <Typography>{time.toLocaleString('fa-IR')}</Typography>
                             </div>
                             <ProductTable product={data.product}/>
                             {data.status == "false" && <Button  variant="contained" color="primary"
