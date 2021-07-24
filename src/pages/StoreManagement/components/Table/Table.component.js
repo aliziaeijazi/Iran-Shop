@@ -47,6 +47,7 @@ const columns = [{
         format: (value) => value.toLocaleString('fa-IR'),
     },
 ];
+
 function find(data, id, key) {
     let arrayindex = 0
     data.forEach((target, index) => {
@@ -56,9 +57,10 @@ function find(data, id, key) {
     )
     return arrayindex
 }
-const Inputs=(props)=> {
+
+const Inputs = (props) => {
     useEffect(() => {
-    }, [props ])
+    }, [props])
 
     const handleChangeInput = (event, key) => {
         if (!Requests.length)
@@ -106,6 +108,7 @@ export default function StickyHeadTable(props) {
             elm.style.borderBottom = "none"
         }
         setrequest(false)
+        toast.success("کالاهای  مورد نظر با موفقیت ویرایش شدند.")
     }
 
     const createData = (id = 0, count, price, productName) => {
@@ -126,17 +129,16 @@ export default function StickyHeadTable(props) {
         if (!requestbtn) {
             props.saveRef.current.disabled = true
             props.saveRef.current.classList.add("Mui-disabled")
-            props.saveRef.current.removeEventListener("click", handlesavebtn, false)
         } else {
             props.saveRef.current.disabled = false
             props.saveRef.current.classList.remove("Mui-disabled")
-            props.saveRef.current.addEventListener("click", handlesavebtn, false)
         }
-        gettingData(    )
+        gettingData()
     }, [requestbtn])
 
     useEffect(() => {
         gettingData()
+        props.saveRef.current.addEventListener("click", handlesavebtn, false)
     }, [])
     const handleChangePage = (event, newPage) => {
         if (requestbtn)
@@ -177,7 +179,8 @@ export default function StickyHeadTable(props) {
                                         return (
                                             <TableCell key={column.id} align={column.align}>
                                                 {((column.id != "count") && (column.id != "price")) ? value :
-                                                    <Inputs id={elmid} value={value} type={column.id} setrequest={setrequest}/>}
+                                                    <Inputs id={elmid} value={value} type={column.id}
+                                                            setrequest={setrequest}/>}
                                             </TableCell>
                                         );
                                     })}

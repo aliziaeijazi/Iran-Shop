@@ -7,11 +7,13 @@ export function FeachProducts() {
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+
 export function FeachProductsWithFilter(fillter) {
     return http.get(`/products?${fillter}`)
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+
 export function FeachProduct(id) {
     return http.get(`/products/${id}`)
         .then((response) => response.data)
@@ -38,6 +40,7 @@ export function CreateData(data) {
         .then((response) => toast.success("کالای مورد نظر با موفقیت ایجاد شد."))
         .catch((error) => Promise.reject(error))
 }
+
 export function EditData(data) {
 
     let formdata = new FormData();
@@ -70,32 +73,35 @@ export function FeachOrders(kind) {
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+
 export function FeachOrdersById(id) {
     return http.get(`/orders/${id}`)
         .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+
 export function DeleteProduct(id) {
     return http.delete(`/products/${id}`)
         .then((response) => toast.success("کالای مورد نظر با موفقیت حذف شد."))
         .catch((error) => Promise.reject(error))
 }
-export function EditPrice_Count(data , key) {
+
+export function EditPrice_Count(data, key) {
     let formdata = new FormData();
     formdata.append(key, data[key]);
     return http.patch(`/products/${data.id}`, formdata, {headers: {"Content-Type": "multipart/form-data"}})
-        .then((response) => toast.success("کالای مورد نظر با موفقیت ویرایش شد.")
-        )
+        .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
+
 export function EditOrdersData(data) {
     return http.patch(`/orders/${data.id}`, data)
-        .then((response) =>response.data)
+        .then((response) => response.data)
         .catch((error) => Promise.reject(error))
 }
 
 export function AddOrder(data) {
-    return http.post("/orders",data )
+    return http.post("/orders", data)
         .then((response) => toast.success("سفارش شما با موفقیت ثبت شد."))
         .catch((error) => Promise.reject(error))
 }
