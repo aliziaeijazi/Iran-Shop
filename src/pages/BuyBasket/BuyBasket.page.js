@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import {Button, Typography} from "@material-ui/core";
-import StickyHeadTable from "./components/Table/Table.component";
+import {Typography} from "@material-ui/core";
+import BasketTable from "./components/Table/Table.component";
+import {addToBasket, editCountInBasket} from "../../redux/action/Basket.action";
+import {connect} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,44 +22,46 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "center",
         flexDirection: "column"
     },
-    title:{
+    title: {
         display: 'flex',
         '& > *': {
             margin: theme.spacing(2),
         },
-        width:"90%",
-        justifyContent:"space-between",
+        width: "90%",
+        justifyContent: "space-between",
     },
-    bold:{
-        fontWeight:"bolder"
+    bold: {
+        fontWeight: "bolder"
     },
-    empty:{
-        color :"red",
-        fontWeight:"bolder"
+    empty: {
+        color: "red",
+        fontWeight: "bolder"
     }
 }));
 
-function Basket() {
+function BasketList(props) {
     const classes = useStyles();
-    const [basketStatus, setBasketStatus] = React.useState(false)
-    useEffect(async ()=>{
-        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
-        if(Basket)
-            setBasketStatus(true)
-    })
     return (
         <div className={classes.root}>
             <Paper className={classes.paper} elevation={5}>
                 <div className={classes.title}>
-                    <Typography className={classes.bold}  variant="h6" > سبد خرید</Typography>
+                    <Typography className={classes.bold} variant="h6"> سبد خرید</Typography>
                 </div>
-                {basketStatus && <StickyHeadTable />}
-                {!basketStatus && <Typography className={classes.empty}  variant="h6" > سبد خرید شما خالی است.لطفا ابتدا کالاهای مورد نظر خود را انتخاب کنید.</Typography>}
+                {!!props.basketList.length && <BasketTable/>}
+                {!props.basketList.length &&
+                <Typography className={classes.empty} variant="h6"> سبد خرید شما خالی است.لطفا ابتدا کالاهای مورد نظر
+                    خود را انتخاب کنید.</Typography>}
             </Paper>
         </div>
 
     );
-
 }
 
+function mapStateToProps(state) {
+    return {
+        basketList: state.Basket.basketList
+    }
+}
+
+const Basket = connect(mapStateToProps)(BasketList)
 export {Basket}

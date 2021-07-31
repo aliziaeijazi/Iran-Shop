@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {createRef, useEffect} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,15 +14,22 @@ import Product from "../../components/Product/Product.component";
 import {Grid} from "@material-ui/core";
 import {PageviewOutlined} from "@material-ui/icons";
 import {Pagination} from "@material-ui/lab";
+import {useHistory} from "react-router-dom";
 
-const drawerWidth = 200;
+const drawerWidth = 180;
 const useStyles = makeStyles((theme) => ({
 
     drawer: {
         width: drawerWidth,
         position: "relative",
         marginLeft: theme.spacing(3),
-        borderLeft:"1px solid gray"
+        borderLeft: "1px solid #e0e0e0",
+        [theme.breakpoints.down("sm")]: {
+            display: "none",
+            position: "absolute",
+            backgroundColor: "white",
+            zIndex: 1
+        },
     },
     drawerPaper: {
         width: drawerWidth,
@@ -30,33 +37,33 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 0,
     },
     drawerContainer: {
-        overflow: 'auto',
+        height: "80vh",
+        overflowY: 'auto',
+        overflowX: "hidden",
+        direction: "ltr",
+
     },
     content: {
         display: "flex",
         flexWrap: "wrap",
-        padding: theme.spacing(5),
-        minHeight: 400,
+        padding: theme.spacing(5, 0),
     },
     subgroup: {
         "&:hover": {
-            backgroundColor: "#ccc",
+            backgroundColor: "#efefef",
         },
-        marginRight: 15,
+        marginRight: 20,
         paddingRight: 5,
         flexGrow: 1,
-        color: "black",
         textAlign: "right",
-        textDecoration: "none",
-        fontSize: 16
+        fontSize: 14,
+        cursor: "pointer"
     },
     group: {
         flexGrow: 1,
-        color: "red",
         textAlign: "right",
-        textDecoration: "none",
         fontSize: 18,
-        fontWeight: "bolder"
+        cursor: "pointer"
     },
     pageination: {
         flexGrow: 1,
@@ -66,44 +73,79 @@ const useStyles = makeStyles((theme) => ({
         alignItems: "flex-end"
     },
     product: {
-        width:1005,
-        height:750,
-        backgroundColor:"white",
-        border:"1px solid #ddd",
-        borderRadius:5
+        height: "min-content",
+        minHeight: 755,
+        width: 1264,
+        backgroundColor: "white",
+        border: "1px solid #ddd",
+        borderRadius: 5,
+        [theme.breakpoints.down("lg")]: {width: 1012,},
+        [theme.breakpoints.down("md")]: {width: 759,},
+        [theme.breakpoints.down("sm")]: {width: 507},
+        [theme.breakpoints.down("xs")]: {width: 255}
     },
-    flex:{
-        display:"flex",
-        justifyContent:"center"
+    flex: {
+        display: "flex",
+        justifyContent: "center"
     },
+    notExit: {
+        fontSize: 20,
+        color: "red",
+        fontWeight: "bold",
+        margin: "auto"
+    },
+    menutoggle: {
+        width: 100,
+        textAlign: "center",
+        fontSize: 20,
+        margin: 20,
+        display: "none",
+        backgroundColor: "#aaa",
+        padding: 3,
+        color: "white",
+        borderRadius: "0px 0px 0px 10px",
+        [theme.breakpoints.down("sm")]: {display: "block"},
+        cursor: "pointer",
+    }
 
 }));
 
-function ProductGroup() {
+function ProductGroup(props) {
     const classes = useStyles();
     const [groups, setgroups] = React.useState([])
     const [data, setData] = React.useState([])
     const [page, setPage] = React.useState(1)
     const [count, setCount] = React.useState(1)
+    const drawerRef = createRef()
+    const toggleMenu = () => {
+        const style = drawerRef.current.style
+        style.display = style.display == "block" ? "none" : "block"
+    }
+    const countPerPage = 10
+    const history = useHistory()
     useEffect(async () => {
         const groups = await FeachGroups()
         setgroups(groups)
-        const url = decodeURI(document.location.href)
-        const fillter = (url.includes("subgroup") ? `subgroupname=${url.split("subgroup=")[1]}` : `groupname=${url.split("group=")[1]}`)
-        const data = await FeachProductsWithFilter(fillter)
-        setData(data)
-        setCount(Math.ceil(data.length / countPerPage))
-    }, [])
-    const countPerPage = 8
+        const pathname = decodeURI(props.pathname)
+        const fillter = pathname.split('/products/')[1].split("&")
+        const params = fillter.length == 2 ? `groupname=${fillter[0]}&subgroupname=${fillter[1]}` : `groupname=${fillter[0]}`
+        const response = (await FeachProductsWithFilter(`${params}&_limit=${countPerPage}&_page=${page}`))
+        setCount(Math.ceil(response.headers['x-total-count'] / countPerPage))
+        setData(response.data)
+    }, [props, page])
+    useEffect(() => {
+        setPage(1)
+    }, [props])
     const handleChange = (event, value) => {
         setPage(value);
-        console.log(value)
     };
     return (
         <main className={classes.content}>
-            <Grid className={classes.flex} container spacing={3}>
-                <Grid item xs={2}>
+            <div onClick={toggleMenu} className={classes.menutoggle}>منو</div>
+            <Grid className={classes.flex} container spacing={0}>
+                <Grid item>
                     <div
+                        ref={drawerRef}
                         className={classes.drawer}
                         variant="permanent"
                         classes={{
@@ -114,26 +156,32 @@ function ProductGroup() {
                         <div className={classes.drawerContainer}>
                             {groups.map((target, index) => <List>
                                 <ListItem key={index}>
-                                    <a className={classes.group}
-                                       href={`/products?group=${target.groupname}`}>{target.groupname}</a>
+                                    <Typography className={classes.group}
+                                                onClick={() => {
+                                                    history.push(`/products/${target.groupname}`)
+                                                }}>{target.groupname}</Typography>
                                 </ListItem>
                                 {target.subgroup.map((subgroup) =>
                                     <ListItem key={subgroup.id}>
-                                        <a className={classes.subgroup}
-                                           href={`/products?subgroup=${subgroup.name}`}>{subgroup.name}</a>
+                                        <Typography className={classes.subgroup}
+                                                    onClick={() => {
+                                                        history.push(`/products/${target.groupname}&${subgroup.name}`)
+                                                    }}>{subgroup.name}</Typography>
                                     </ListItem>)}
-                                <Divider style={{backgroundColor: "red", fontSize: 2}}/>
+                                <Divider style={{backgroundColor: "#ddd", fontSize: 2, width: 190}}/>
                             </List>)}
                         < /div>
                     </div>
                 </Grid>
-                <Grid container spacing={0}  className={classes.product}>
-                    {data.map((target, index) => {
-                        if (((page - 1) * countPerPage ) <= index && index < page * countPerPage) return <Grid
-                            item><Product data={target}/></Grid>
-                    })}
+
+                <Grid container className={classes.product}>
+                    {!data.length && <Typography className={classes.notExit}> کالایی جهت نمایش وجود ندارد.</Typography>}
+                    {data.map((target, index) =>
+                        <Grid item><Product data={target}/></Grid>
+                    )}
                     <Grid container className={classes.pageination} xs={12}>
-                        <Pagination count={count} page={page} shape="rounded" color={"primary"} className={classes.pageinationBotton} hidePrevButton hideNextButton
+                        <Pagination count={count} page={page} shape="rounded" color={"primary"}
+                                    className={classes.pageinationBotton} hidePrevButton hideNextButton
                                     onChange={handleChange}/>
                     </Grid>
                 </Grid>

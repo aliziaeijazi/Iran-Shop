@@ -1,7 +1,5 @@
-import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import {deepOrange} from '@material-ui/core/colors';
 import Logo from "../../../../../asset/images/logo.svg"
 import {Typography} from "@material-ui/core";
 

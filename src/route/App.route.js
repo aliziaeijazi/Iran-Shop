@@ -4,6 +4,7 @@ import {Management, Users} from "../Layout";
 import {Orders, Payment, ProductGroup, ProductListManagement, Products, StoreManagement} from "../pages";
 import {Product} from "../pages/Product/Product.page";
 import {Basket} from "../pages/";
+import {render} from "react-dom";
 function AppRoute() {
     return (
         <BrowserRouter>
@@ -34,20 +35,15 @@ function AppRoute() {
                         <Products/>
                     </Users>
                 </Route>
-                <Route exact path="/products">
-                    <Users><ProductGroup/></Users>
-
+                <Route  path="/products/:fillter" render={()=> <Users> <ProductGroup pathname={document.location.pathname}/></Users>}>
                 </Route>
-                <Route path="/product">
+                <Route path="/product/:id">
                     <Users><Product/></Users>
                 </Route>
                 <Route path="/basket">
                     <Users><Basket/></Users>
 
                 </Route>
-                {/*<Route path="/cheackout">*/}
-                {/*    <Users>cheackout</Users>*/}
-                {/*</Route>*/}
                 <Route path="/paymentresult">
                     <Users><Payment/></Users>
 

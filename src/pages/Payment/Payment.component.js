@@ -3,7 +3,6 @@ import success from "../../asset/images/success.png"
 import {useEffect, useState} from "react";
 import {Typography} from "@material-ui/core";
 import {AddOrder, EditCount, EditPrice_Count, FeachProduct} from "../../api/store.api";
-
 function Payment() {
     const data = {
         successfull: {
@@ -13,7 +12,6 @@ function Payment() {
         failed: {imageSrc: error, text: 'پرداخت موفقیت آمیز نبود. سفارش شما در انتظار پرداخت است.'}
     }
     const [status, setStatus] = useState("failed")
-    // const [requset , setrequest] = useState([])
     const calculateSum_UpdateCount = async (data) => {
         let Sum = 0
         for(let i = 0 ; i<data.length ; i++)
@@ -24,12 +22,11 @@ function Payment() {
             Sum += target.counter * target.price
         }
         return Sum
-
     }
     useEffect(async () => {
         const statusFromServer = document.location.href.split("status=")[1]
-        setStatus(statusFromServer=="true" ? "successfull" : "failed")
-        if (status == "successfull") {
+        if (statusFromServer == "true") {
+            console.log(statusFromServer)
             const Basket = await JSON.parse(localStorage.getItem("BasketList"))
             const Order = await JSON.parse(localStorage.getItem("Order"))
             if (Order && Basket) {
@@ -49,11 +46,12 @@ function Payment() {
                     await AddOrder(Data)
                     localStorage.removeItem("BasketList")
                     localStorage.removeItem("Order")
-                    document.location.reload()
+                    setStatus("successfull")
                 }catch (e){
                     console.log("errrod" , e)
-                }
+                    setStatus("failed")
 
+                }
             }
         }
     })

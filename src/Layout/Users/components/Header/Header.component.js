@@ -1,30 +1,27 @@
 import {NavBar} from "./Navbar/Navbar.component";
-import React from 'react';
-import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import {Link} from "react-router-dom";
-import {createMuiTheme} from "@material-ui/core";
 import {StoreName} from "./StoreName/StoreName.component";
+import {Search} from "./Search/Search.component";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        padding:0,
         width: "100%",
         position:"fixed",
         zIndex:1,
+        color:"red",
+
     },
     appbar: {
         backgroundColor: "white",
         color: "black",
+        height:65,
+        display:"flex",
+        justifyContent:"center",
 
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        fontFamily: "IranSans",
     },
     flex:{
         display:"flex",
@@ -39,6 +36,7 @@ function Header() {
             <AppBar className={classes.appbar} position="static">
                 <Toolbar className={classes.flex}>
                     <StoreName/>
+                    <Search/>
                     <NavBar/>
                 </Toolbar>
             </AppBar>

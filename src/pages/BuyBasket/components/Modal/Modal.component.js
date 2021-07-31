@@ -10,7 +10,8 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import {CreateData, EditData, FeachGroups, FeachProduct} from "../../../../api/store.api";
 import {toast} from "react-toastify";
 import {useHistory} from "react-router-dom"
-
+import {DatePicker} from "jalali-react-datepicker";
+import {connect} from "react-redux";
 
 function getModalStyle() {
     const top = 50;
@@ -25,34 +26,30 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
     paper: {
+        height:600,
         position: 'absolute',
-        width: 500,
+        width: 400,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid gray',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
     },
     modalroot: {
         display: "flex",
         flexWrap: "wrap",
         justifyContent: "space-between",
-        alignContent: "space-around",
+        alignItems: "center",
         padding: theme.spacing(4)
     },
     formControl: {
-        minWidth: 500,
-    },
-    selectEmpty: {
-        margin: theme.spacing(2),
-    },
-    describtionTextArea: {
-        margin: theme.spacing(0, 0, 3),
-        minHeight: "150px"
+        minWidth: 400,
     },
     fieldmargin: {
         margin: theme.spacing(3, 0, 1),
-        minWidth: 500,
-
+        minWidth: 400,
+    },
+    datePicker:{
+        margin: theme.spacing(0, 0, 3),
+        minWidth: 400,
     },
     submit: {
         width: 200,
@@ -66,7 +63,7 @@ const theme = createMuiTheme({
     direction: "rtl"
 });
 
-export default function FinalSeeling(props) {
+function FinalSeelingMoadl(props) {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [open, setOpen] = React.useState(false);
@@ -118,6 +115,7 @@ export default function FinalSeeling(props) {
             toast.error(<h3 style={{fontFamily: "IRANSans", fontSize: "large"}}>لطفا تاریخ تحویل را مشخص کنید.</h3>)
         else {
             await localStorage.setItem("Order", JSON.stringify(data))
+            await localStorage.setItem("BasketList" , JSON.stringify(props.basketList))
             window.open("http://localhost:3005/payment", "_self")
         }
     }
@@ -145,8 +143,8 @@ export default function FinalSeeling(props) {
                             <TextField required id="phoneNumber" label="تلفن همراه:(جهت هماهنگی ارسال سفارش)"
                                        className={classes.fieldmargin} type={"number"}
                                        onChange={(event) => handleChangeData("phoneNumber", event.target.value)}/>
-                            <TextField required id="deliveryDate" label="تاریخ تحویل :" className={classes.fieldmargin}
-                                       onChange={(event) => handleChangeData("deliveryDate", event.target.value)}/>
+                            <FormLabel  label="تاریخ تحویل :" className={classes.fieldmargin}>تاریخ تحویل : </FormLabel>
+                            <DatePicker className={classes.datePicker} onClickSubmitButton={(event) => handleChangeData("deliveryDate", event.value._d)}/>
                             <Button variant="contained" onClick={handleSubmit} color="primary"
                                     className={classes.submit}>
                                 پرداخت
@@ -158,3 +156,12 @@ export default function FinalSeeling(props) {
         </div>
     );
 }
+
+const mapStateToProps = (state) =>{
+    return {
+        basketList: state.Basket.basketList
+    }
+}
+
+const FinalSeeling = connect(mapStateToProps)(FinalSeelingMoadl)
+export default FinalSeeling

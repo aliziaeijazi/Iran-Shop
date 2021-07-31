@@ -12,8 +12,12 @@ import {Avatar, Button, InputBase, Typography} from "@material-ui/core";
 import {DeleteProduct, FeachProduct, FeachProducts} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
 import FinalSeeling from "../Modal/Modal.component";
+import {addToBasket, deleteFromBasket, editCountInBasket} from "../../../../redux/action/Basket.action";
+import {connect} from "react-redux";
+import {toast} from "react-toastify";
 
-const useStyles = makeStyles({
+
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '90%',
     },
@@ -28,10 +32,14 @@ const useStyles = makeStyles({
     avatar: {
         width: 70,
         height: 70,
+        [theme.breakpoints.down("sm")]: {
+            width: 20,
+            height: 20,
+        }
     },
     btn: {
         margin: 2,
-        minWidth: 90,
+        minWidth: 40,
     },
     buying: {
         margin: 10,
@@ -42,110 +50,82 @@ const useStyles = makeStyles({
         display: "flex",
         alignItems: "center"
     }
-});
+}));
 const columns = [
-
     {
         id: 'avatar',
         label: 'تصویر',
-        minWidth: 50,
+        minWidth: 20,
         align: 'center',
     },
     {
         id: 'productName',
         label: 'نام کالا',
-        minWidth: 200,
+        minWidth: 100,
         align: 'center',
     },
     {
         id: 'price',
         label: 'قیمت',
-        minWidth: 150,
+        minWidth: 20,
         align: 'center',
-        formet: (value) => value.toLocaleString("fa-IR"),
+        format: (value) => value.toLocaleString("fa-IR"),
     },
     {
         id: 'count',
         label: 'تعداد',
-        minWidth: 150,
+        minWidth: 20,
         align: 'center',
     },
     {
         id: 'sum',
         label: 'جمع',
-        minWidth: 100,
+        minWidth: 30,
         align: 'center',
-        formet: (value) => value.toLocaleString("fa-IR")
+        format: (value) => value.toLocaleString("fa-IR")
     },
-
-    {id: 'action', label: 'عملیات', align: "center", minWidth: 150},
-
+    {id: 'action', label: 'عملیات', align: "center", minWidth: 20},
 ];
 
-
-export default function StickyHeadTable() {
+function BasketTable(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [data, setData] = React.useState([])
     const [modolstatus, setStatus] = React.useState(false)
-    const [change, changing] = React.useState(false)
     const [Sum, SetSumOfProduct] = React.useState(0)
-    const DeleteFromBasket = async (id) => {
-        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
-        let arrayindex = 0
-        Basket.forEach((target, index) => {
-                if (target.id == id)
-                    arrayindex = index
-            }
-        )
-        Basket.splice(arrayindex, 1)
-        await localStorage.setItem("BasketList", JSON.stringify(Basket))
+    const DeleteFromBasket = (id) => {
+        const Basket = props.basketList
+        const index = Basket.findIndex((target) => (target.id == id))
+        props.deleteFromBasket(index)
     }
-    const handleDelete = async (elm) => {
-        if (elm.tagName == "SPAN")
-            await DeleteFromBasket(+elm.parentNode.id)
-        else
-            await DeleteFromBasket(+elm.id)
-        changing(true)
-        document.location.reload()
-
-
-    }
-    const find = (data, id) => {
-        let arrayindex = -1
-        data.forEach((target, index) => {
-                if (target.id == id)
-                    arrayindex = index
-            }
-        )
-        return arrayindex
+    const handleDelete = (elm) => {
+        const id = elm.tagName == "SPAN" ? +elm.parentNode.id : +elm.id
+        DeleteFromBasket(id)
     }
     const handleChangeInput = async (event, id) => {
-        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
-        const index = await find(Basket, id)
-        Basket[index].counter = event.target.value
-        localStorage.setItem("BasketList", JSON.stringify(Basket))
-        changing(true)
+        const data = await FeachProduct(id)
+        if (event.target.value > +data.count)
+            toast.error(<h4>کالای مورد نظر شما به تعداد درخواستی در انبار موجود نیست.</h4>)
+        else {
+            const Basket = props.basketList
+            const index = Basket.findIndex((target) => (target.id == id))
+            props.editCountInBasket(index, event.target.value)
+        }
     }
     const createData = (id = 0, imageSrc, productName, price, _count, maxCount) => {
-        let action = <div>
-            <Button id={id} className={classes.btn} variant="contained" color="secondary"
-                    onClick={(event) => handleDelete(event.target)}>
-                حذف
-            </Button>
-        </div>
+        let action = <div><Button id={id} className={classes.btn} variant="contained" color="secondary"
+                                  onClick={(event) => handleDelete(event.target)}>حذف</Button></div>
         let count = <InputBase id={id} defaultValue={_count} type="number" key={id}
                                inputProps={{style: {textAlign: "center"}, max: maxCount, min: 1}}
-                               onClick={(event) => handleChangeInput(event, id)}
-        />
+                               onClick={(event) => handleChangeInput(event, id)}/>
         const sum = _count * price
         let avatar = <Avatar variant="rounded" className={classes.avatar} alt={productName}
                              src={`${BASE_URL}${imageSrc}`}/>
         return {avatar, productName, price, count, sum, action};
     }
     const createRowsData = (data) => {
-        const rows = data.map((target) => createData(target.id, target.image, target.name, target.price, target.count, target.maxCount))
+        const rows = data.map((target) => createData(target.id, target.image, target.name, +target.price, target.count, target.maxCount))
         let sum = 0
         rows.map((target) => {
             sum += target.sum
@@ -155,7 +135,7 @@ export default function StickyHeadTable() {
 
     }
     const gettingBasket = async () => {
-        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
+        const Basket = props.basketList
         let Data = []
         if (Basket)
             Basket.map(async (target) => {
@@ -171,16 +151,10 @@ export default function StickyHeadTable() {
                 Data.push(data)
                 await createRowsData(Data)
             })
-
     }
     useEffect(async () => {
         gettingBasket()
-    }, [])
-    useEffect(() => {
-        gettingBasket()
-        changing(false)
-    }, [change])
-
+    }, [props.basketList])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -191,7 +165,6 @@ export default function StickyHeadTable() {
     const falsemodal = () => {
         setStatus(false)
     }
-
     const rows = data
     return (
         <div className={classes.root}>
@@ -247,7 +220,7 @@ export default function StickyHeadTable() {
                 {/*<InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>*/}
             </Paper>
             <div className={classes.footer}><Typography className={classes.bold}
-                                                        variant="h6">{`مبلغ کل: ${Sum} تومان`}</Typography>
+                                                        variant="h6">{`مبلغ کل: ${Sum.toLocaleString('fa-IR')} تومان`}</Typography>
                 <Button className={classes.buying} variant="contained" color="primary" onClick={() => setStatus(true)}>
                     نهایی کردن خرید
                 </Button></div>
@@ -256,3 +229,19 @@ export default function StickyHeadTable() {
 
     );
 }
+
+function mapStateToProps(state) {
+    return {
+        basketList: state.Basket.basketList
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addToBasket: (value) => dispatch(addToBasket(value)),
+        editCountInBasket: (index, counter) => dispatch(editCountInBasket(index, counter)),
+        deleteFromBasket: (index) => dispatch(deleteFromBasket(index))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasketTable)

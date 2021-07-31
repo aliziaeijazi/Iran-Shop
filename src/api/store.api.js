@@ -1,6 +1,5 @@
 import {http} from "../utils/http.utils";
 import {toast} from "react-toastify";
-import React from "react";
 
 export function FeachProducts() {
     return http.get(`/products`)
@@ -10,7 +9,7 @@ export function FeachProducts() {
 
 export function FeachProductsWithFilter(fillter) {
     return http.get(`/products?${fillter}`)
-        .then((response) => response.data)
+        .then((response) => response)
         .catch((error) => Promise.reject(error))
 }
 

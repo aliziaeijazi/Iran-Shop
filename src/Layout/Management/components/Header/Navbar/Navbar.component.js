@@ -1,5 +1,5 @@
-import React, {createRef, useEffect, useRef} from 'react';
-import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
+import {useState, createRef, useEffect} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 function NavBar() {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
     useEffect(() => {
         if (document.location.pathname == "/management/productlist") setValue(0)
         else if (document.location.pathname == "/management/supply") setValue(1)

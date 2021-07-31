@@ -17,7 +17,7 @@ ReactDOM.render(
             <Provider store={store}>
                 <AppRoute/>
                 <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false}
-                                closeOnClick
+                                closeOnClick style={{maxWidth:"75%" }}
                                 rtl={true} pauseOnFocusLoss draggable pauseOnHover/>
             </Provider>
         </RTL>
