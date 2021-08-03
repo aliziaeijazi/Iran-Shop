@@ -149,7 +149,7 @@
       "subgroupname": "lenovo",
       "price": "11995004",
       "groupname": "لپتاپ",
-      "count": "12",
+      "count": "9",
       "describtion": "ظرفیت حافظه RAM:\n4 گیگابایت\nظرفیت حافظه داخلی:\n128 گیگابایت\nسازنده پردازنده گرافیکی:\nAMD\nاندازه صفحه نمایش:\n15.6 اینچ\nطبقه‌بندی:\nکاربری عمومی\nسری پردازنده:\nRyzen 3\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nHD|1366x768\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nBoot-Up DOS\nپورت HDMI:\nدارد",
       "image": "/files/a11710832d2b85393389d604d9527cd8",
       "createdAt": 1626209214868,
@@ -259,7 +259,7 @@
       "subgroupname": "سامسونگ",
       "price": "6100000",
       "groupname": "موبایل",
-      "count": "2",
+      "count": "1",
       "describtion": "حافظه داخلی:\n128 گیگابایت\nشبکه های ارتباطی:\n4G، 3G، 2G\nدوربین‌های پشت گوشی:\n4 ماژول دوربین\nسیستم عامل:\nAndroid\nتوضیحات سیم کارت:\nسایز نانو (8.8 × 12.3 میلی‌متر)\nمقدار RAM:\n6 گیگابایت\nرزولوشن عکس:\n48 مگاپیکسل\nنسخه سیستم عامل:\nAndroid 10\nفناوری صفحه‌نمایش:\nSuper AMOLED\nویژگی‌های خاص:\nمجهز به حس‌گر اثرانگشت ، فبلت ، مناسب عکاسی ، مناسب عکاسی سلفی\nاندازه:\n6.5\nتعداد سیم کارت:\nدو\n",
       "image": "/files/3ec1cc0b118b61b3d4cefc8301f307b9",
       "createdAt": 1626211081204,
@@ -290,242 +290,34 @@
   ],
   "orders": [
     {
-      "name": "امید",
-      "family": "ضیایی جزی",
-      "phone": "09133382279",
-      "deliveryTime": "1400/05/06",
-      "sumBuying": 55,
-      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۳۸:۵۴",
-      "status": "true",
-      "product": [
-        {
-          "name": "لپ تاپ 14 اینچی ایسوس مدل ZenBook UM433DA - Z",
-          "id": 3,
-          "groupname": "لپتاپ",
-          "subgroupname": "asus",
-          "price": "22699000",
-          "counter": "4"
-        },
-        {
-          "name": "فلش مموری سن دیسک مدل Cruzer Blade CZ50 ظرفیت 16 گیگابایت",
-          "id": 14,
-          "groupname": "هارد و فلش",
-          "subgroupname": "سن دیسک",
-          "price": "78700",
-          "counter": "20"
-        }
-      ],
-      "address": "اصفهان گزبرخوار بلوار شهدا",
-      "createdAt": 1627167955886,
-      "id": 1
-    },
-    {
       "name": "علی",
       "family": "ضیایی جزی",
-      "phone": "5",
-      "deliveryTime": "5",
-      "sumBuying": 1574000,
-      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۴۰:۰۷",
-      "status": "true",
-      "product": [
-        {
-          "name": "فلش مموری سن دیسک مدل Cruzer Blade CZ50 ظرفیت 16 گیگابایت",
-          "id": 14,
-          "groupname": "هارد و فلش",
-          "subgroupname": "سن دیسک",
-          "price": "78700",
-          "counter": "20"
-        }
-      ],
-      "address": "55",
-      "createdAt": 1627168184786,
-      "id": 2
-    },
-    {
-      "name": "حسین ",
-      "family": "سلامی",
-      "phone": "09911122279",
-      "deliveryTime": "1400/05/07",
-      "sumBuying": 47800000,
-      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۳:۴۶:۰۸",
-      "status": "true",
-      "product": [
-        {
-          "name": "لپ تاپ 15.6 اینچی ایسوس مدل R565MA-BQ197",
-          "id": 4,
-          "groupname": "لپتاپ",
-          "subgroupname": "asus",
-          "price": "11950000",
-          "counter": "4"
-        }
-      ],
-      "address": "اصفهان",
-      "createdAt": 1627168553377,
-      "id": 3
-    },
-    {
-      "name": "حسین",
-      "family": "خرازی",
-      "phone": "09123456789",
-      "deliveryTime": "1400/05/09",
-      "sumBuying": 45550000,
-      "endDeliveriTime": "۱۴۰۰/۵/۳،‏ ۴:۱۱:۱۰",
-      "status": "true",
-      "product": [
-        {
-          "name": "لپ تاپ 15.6 اینچی ایسوس مدل R565MA-BQ197",
-          "id": 4,
-          "groupname": "لپتاپ",
-          "subgroupname": "asus",
-          "price": "11950000",
-          "counter": 1
-        },
-        {
-          "name": "لپ تاپ 13 اینچی اپل مدل MacBook Air MQD32 2017",
-          "id": 10,
-          "groupname": "لپتاپ",
-          "subgroupname": "apple",
-          "price": "33600000",
-          "counter": 1
-        }
-      ],
-      "address": "اصفهان",
-      "createdAt": 1627170003241,
-      "id": 4
-    },
-    {
-      "name": "a",
-      "family": "a",
-      "phone": "1",
-      "deliveryTime": "2021-08-19T19:30:00.000Z",
-      "sumBuying": 11980000,
-      "endDeliveriTime": "۱۴۰۰/۵/۸،‏ ۲۳:۱۴:۰۷",
-      "status": "true",
-      "product": [
-        {
-          "name": " لپ تاپ 15.6 اینچی ایسوس مدل VivoBook X540UA - DM527",
-          "id": 1,
-          "groupname": "لپتاپ",
-          "subgroupname": "asus",
-          "price": "11980000",
-          "counter": 1
-        }
-      ],
-      "address": "a",
-      "createdAt": 1627670621223,
-      "id": 5
-    },
-    {
-      "name": "فرزاد ",
-      "family": "عرفانی ",
-      "phone": "09395323352",
-      "deliveryTime": "2021-08-02T05:00:00.000Z",
-      "sumBuying": 44770000,
-      "endDeliveriTime": "۱۴۰۰/۵/۹،‏ ۹:۵۵:۰۶",
-      "status": "true",
-      "product": [
-        {
-          "name": "گوشی موبایل سامسونگ مدل Galaxy A51 SM-A515F/DSN دو سیم کارت ظرفیت 128گیگابایت",
-          "id": 16,
-          "groupname": "موبایل",
-          "subgroupname": "سامسونگ",
-          "price": "6100000",
-          "counter": "5"
-        },
-        {
-          "name": "هارد اکسترنال ای دیتا مدل HD710 Pro ظرفیت 1 ترابایت",
-          "id": 11,
-          "groupname": "هارد و فلش",
-          "subgroupname": "ای دیتا",
-          "price": "1427000",
-          "counter": "10"
-        }
-      ],
-      "address": "گز برخوار خیابان سجاد خیابان بنفشه جنب پارک سجاد ",
-      "createdAt": 1627709062493,
-      "id": 6
-    },
-    {
-      "name": "ایلیا",
-      "family": "سیل سپور",
-      "phone": "09133258745",
-      "deliveryTime": "2021-08-02T19:30:00.000Z",
-      "sumBuying": 70200000,
-      "endDeliveriTime": "۱۴۰۰/۵/۱۰،‏ ۱۹:۰۵:۵۴",
-      "status": "true",
-      "product": [
-        {
-          "name": "گوشی موبایل سامسونگ مدل Galaxy A51 SM-A515F/DSN دو سیم کارت ظرفیت 128گیگابایت",
-          "id": 16,
-          "groupname": "موبایل",
-          "subgroupname": "سامسونگ",
-          "price": "6100000",
-          "counter": "6"
-        },
-        {
-          "name": "لپ تاپ 13 اینچی اپل مدل MacBook Air MQD32 2017",
-          "id": 10,
-          "groupname": "لپتاپ",
-          "subgroupname": "apple",
-          "price": "33600000",
-          "counter": 1
-        }
-      ],
-      "address": "تهران نیاوران",
-      "createdAt": 1627709523229,
-      "id": 7
-    },
-    {
-      "name": "ایمان",
-      "family": "شفیعی",
       "phone": "09140455875",
-      "deliveryTime": "2021-08-01T15:39:24.388Z",
-      "sumBuying": 151843000,
-      "endDeliveriTime": "۱۴۰۰/۵/۱۰،‏ ۱۹:۱۱:۰۴",
-      "status": "true",
+      "deliveryTime": "2021-08-06T06:30:00.000Z",
+      "sumBuying": 18095004,
+      "endDeliveriTime": "",
+      "status": "false",
       "product": [
         {
-          "name": "لپ تاپ 15 اینچی لنوو مدل IdeaPad Gaming 3 15IMH05",
-          "id": 5,
+          "name": "لپ تاپ 15.6 اینچی لنوو مدل Ideapad L340 - J",
+          "id": 6,
           "groupname": "لپتاپ",
           "subgroupname": "lenovo",
-          "price": "28000000",
-          "counter": "5"
+          "price": "11995004",
+          "counter": 1
         },
         {
-          "name": "اس اس دی اینترنال وسترن دیجیتال مدل Green WDS240G2G0A ظرفیت 240 گیگابایت",
-          "id": 13,
-          "groupname": "هارد و فلش",
-          "subgroupname": "وسترن دیجیتال",
-          "price": "911000",
-          "counter": "13"
-        }
-      ],
-      "address": "ایمانشهر",
-      "createdAt": 1627828805865,
-      "id": 8
-    },
-    {
-      "name": "علی",
-      "family": "ضیایی جزی",
-      "phone": "09135",
-      "deliveryTime": "2021-08-16T19:30:00.000Z",
-      "sumBuying": 11950000,
-      "endDeliveriTime": "۱۴۰۰/۵/۱۲،‏ ۲۲:۳۵:۰۸",
-      "status": "true",
-      "product": [
-        {
-          "name": "لپ تاپ 15.6 اینچی ایسوس مدل R565MA-BQ197",
-          "id": 4,
-          "groupname": "لپتاپ",
-          "subgroupname": "asus",
-          "price": "11950000",
+          "name": "گوشی موبایل سامسونگ مدل Galaxy A51 SM-A515F/DSN دو سیم کارت ظرفیت 128گیگابایت",
+          "id": 16,
+          "groupname": "موبایل",
+          "subgroupname": "سامسونگ",
+          "price": "6100000",
           "counter": 1
         }
       ],
-      "address": "گز برخوار",
-      "createdAt": 1628013894805,
-      "id": 9
+      "address": "اصفهان گز برخوار",
+      "createdAt": 1628022826496,
+      "id": 1
     }
   ]
 }
