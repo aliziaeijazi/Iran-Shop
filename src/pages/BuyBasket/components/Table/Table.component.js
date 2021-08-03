@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import {Avatar, Button, InputBase, Typography} from "@material-ui/core";
-import {DeleteProduct, FeachProduct, FeachProducts} from "../../../../api/store.api";
+import { FeachProduct} from "../../../../api/store.api";
 import {BASE_URL} from "../../../../configs/variable.config";
 import FinalSeeling from "../Modal/Modal.component";
 import {addToBasket, deleteFromBasket, editCountInBasket} from "../../../../redux/action/Basket.action";
@@ -213,8 +213,8 @@ function BasketTable(props) {
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                    onChangePage={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    onPageChange={handleChangePage}
                     labelRowsPerPage={'تعداد سطر در هر صفحه'}
                 />
                 {/*<InsertProduct id={modalId} open={modolstatus} falsemodal={falsemodal}/>*/}

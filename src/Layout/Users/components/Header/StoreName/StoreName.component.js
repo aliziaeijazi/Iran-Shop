@@ -41,7 +41,6 @@ function StoreName() {
         <div className={classes.root}>
             <Avatar onClick={handleClick} variant="rounded" className={classes.logo} src={Logo}>
             </Avatar>
-            {/*<Typography className={classes.title}>فروشگاه ایران زمین</Typography>*/}
         </div>
     );
 }

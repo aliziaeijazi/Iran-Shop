@@ -3,13 +3,8 @@ import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import {Button, createMuiTheme, Input, TextField, Typography} from "@material-ui/core";
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-import {CreateData, EditData, FeachGroups, FeachProduct} from "../../../../api/store.api";
+import {Button, createTheme, TextField, Typography} from "@material-ui/core";
 import {toast} from "react-toastify";
-import {useHistory} from "react-router-dom"
 import {DatePicker} from "jalali-react-datepicker";
 import {connect} from "react-redux";
 
@@ -59,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 }));
-const theme = createMuiTheme({
+const theme = createTheme({
     direction: "rtl"
 });
 
@@ -76,8 +71,6 @@ function FinalSeelingMoadl(props) {
             "orderTime": "",
         }
     )
-    const history = useHistory()
-    const [state, setState] = React.useState();
     const handleChangeData = async (key, value) => {
         await setdata({
                 ...data, [key]: value

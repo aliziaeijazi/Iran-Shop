@@ -4,7 +4,6 @@ import {Management, Users} from "../Layout";
 import {Orders, Payment, ProductGroup, ProductListManagement, Products, StoreManagement} from "../pages";
 import {Product} from "../pages/Product/Product.page";
 import {Basket} from "../pages/";
-import {render} from "react-dom";
 function AppRoute() {
     return (
         <BrowserRouter>

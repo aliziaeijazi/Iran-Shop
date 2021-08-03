@@ -51,7 +51,7 @@ function StoreManagement() {
                             ذخیره
                         </Button>
                     </div>
-                    <StickyHeadTable saveRef={saveRef}></StickyHeadTable>
+                    <StickyHeadTable saveRef={saveRef}/>
                 </Paper>
             </div>
     );

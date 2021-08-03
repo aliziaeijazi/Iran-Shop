@@ -1,36 +1,42 @@
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Logo from "../../../../../asset/images/logo.svg"
-import {Typography} from "@material-ui/core";
+import Logo from "../../../../../asset/images/logo.png"
+import {useHistory} from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        '& > *': {
-            margin: theme.spacing(1),
+
+    },
+    logo: {
+        [theme.breakpoints.up('md')]: {
+            display: "block",
+            width: 230,
+            cursor: "pointer"
         },
+        display: "none",
     },
-    square: {
-        width:120,
-        height:50
-    },
-    title: {
-        display:"flex",
-        fontFamily: "IranSans",
-        alignItems:"center",
-        fontWeight:"bolder"
-    }
+    // title: {
+    //     display:"flex",
+    //     fontFamily: "IranSans",
+    //     fontSize:20,
+    //     alignItems:"center"
+    // }
 
 }));
 
 function StoreName() {
     const classes = useStyles();
-
+    const history = useHistory()
+    const handleClick = () => {
+        history.push('/')
+    }
     return (
         <div className={classes.root}>
-            <Avatar variant="rounded" className={classes.square} src={Logo}>
+            <Avatar onClick={handleClick} variant="rounded" className={classes.logo} src={Logo}>
             </Avatar>
-            <Typography className={classes.title}>پنل مدیریت فروشگاه ایران زمین</Typography>
         </div>
     );
 }

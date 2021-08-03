@@ -3,7 +3,7 @@ import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import {Button, createMuiTheme, Input, TextField, Typography} from "@material-ui/core";
+import {Button, createTheme, Input, TextField, Typography} from "@material-ui/core";
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     }
 
 }));
-const theme = createMuiTheme({
+const theme = createTheme({
     direction: "rtl"
 });
 
@@ -104,7 +104,8 @@ export default function Detail(props) {
         toast.success(<h4>وضعیت سفارش به تحویل نهایی تغییر پیدا کرد.</h4>)
         handleClose()
     }
-    const time = new Date(data.createdAt)
+    const ordertime = new Date(data.createdAt)
+    const deliverytime = new Date(data.deliveryTime)
     return (
         <div>
             <Modal
@@ -133,11 +134,11 @@ export default function Detail(props) {
                             </div>
                             <div className={classes.row}>
                                 <Typography className={classes.title}>زمان تحویل : </Typography>
-                                <Typography>{data.deliveryTime}</Typography>
+                                <Typography>{deliverytime.toLocaleString('fa-IR')}</Typography>
                             </div>
                             <div className={classes.row}>
                                 <Typography className={classes.title}>زمان سفارش : </Typography>
-                                <Typography>{time.toLocaleString('fa-IR')}</Typography>
+                                <Typography>{ordertime.toLocaleString('fa-IR')}</Typography>
                             </div>
                             <ProductTable product={data.product}/>
                             {data.status == "false" && <Button  variant="contained" color="primary"

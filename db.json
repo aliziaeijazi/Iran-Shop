@@ -94,7 +94,7 @@
       "subgroupname": "asus",
       "price": "11980000",
       "groupname": "لپتاپ",
-      "count": "4",
+      "count": "10",
       "describtion": "ظرفیت حافظه RAM:\n4 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nIntel\nاندازه صفحه نمایش:\n15.6 اینچ\nسری پردازنده:\nCore i3\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون سیستم‌عامل\nپورت HDMI:\nدارد",
       "image": "/files/93621ead8139f58a5390233f97e7dcdd",
       "createdAt": 1626208392984,
@@ -127,7 +127,7 @@
       "subgroupname": "asus",
       "price": "11950000",
       "groupname": "لپتاپ",
-      "count": "7",
+      "count": "0",
       "describtion": "ظرفیت حافظه RAM:\n16 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nNVIDIA\nاندازه صفحه نمایش:\n14 اینچ\nطبقه‌بندی:\nکاربری مالتی‌مدیا، کاربری عمومی، باریک و سبک\nسری پردازنده:\nRyzen 7\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون ویندوز\nپورت HDMI:\nدارد",
       "image": "/files/644f002717ec9f0f434688d097637d74",
       "createdAt": 1626208984195,
@@ -138,7 +138,7 @@
       "subgroupname": "lenovo",
       "price": "28000000",
       "groupname": "لپتاپ",
-      "count": "5",
+      "count": "0",
       "describtion": "ظرفیت حافظه RAM:\n16 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت\nسازنده پردازنده گرافیکی:\nNVIDIA\nاندازه صفحه نمایش:\n15.6 اینچ\nطبقه‌بندی:\nمخصوص بازی، کاربری مالتی‌مدیا، کاربری عمومی\nسری پردازنده:\nCore i7\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون سیستم‌عامل\nپورت HDMI:\nدارد",
       "image": "/files/10e04b3b5fa8c3b8d05b74a36718b2cf",
       "createdAt": 1626209179612,
@@ -226,7 +226,7 @@
       "subgroupname": "وسترن دیجیتال",
       "price": "911000",
       "groupname": "هارد و فلش",
-      "count": "13",
+      "count": "0",
       "describtion": "ظرفیت:\n240 گیگابایت\nرابط:\nSATAIII\nفرم فاکتور:\n2.5 اینچ\nپشتیبانی از RAID:\nخیر",
       "image": "/files/0ded5a2dad75bf41e127bda18c8fdd85",
       "createdAt": 1626210939738,
@@ -286,17 +286,6 @@
       "image": "/files/6eb0f189bd291eae238fc7604e831d65",
       "createdAt": 1626211167278,
       "id": 18
-    },
-    {
-      "name": "لپ تاپ 15 اینچی لنوو مدل IdeaPad 5-A",
-      "subgroupname": "lenovo",
-      "price": "0",
-      "groupname": "لپتاپ",
-      "count": "0",
-      "describtion": "ظرفیت حافظه RAM:\n16 گیگابایت\nظرفیت حافظه داخلی:\nیک ترابایت و 256 گیگابایت\nسازنده پردازنده گرافیکی:\nNVIDIA\nاندازه صفحه نمایش:\n15.0 اینچ\nطبقه‌بندی:\nکاربری مالتی‌مدیا، کاربری عمومی\nسری پردازنده:\nCore i7\nنوع حافظه RAM:\nDDR4\nدقت صفحه نمایش:\nFull HD| 1920 x1080\nصفحه نمایش مات:\nبله\nصفحه نمایش لمسی:\nخیر\nسیستم عامل:\nبدون ویندوز\nپورت HDMI:\nدارد",
-      "image": "/files/8e460eb52908a68c6f6bc38971717bf2",
-      "createdAt": 1627501734719,
-      "id": 19
     }
   ],
   "orders": [
@@ -462,8 +451,8 @@
       "phone": "09133258745",
       "deliveryTime": "2021-08-02T19:30:00.000Z",
       "sumBuying": 70200000,
-      "endDeliveriTime": "",
-      "status": "false",
+      "endDeliveriTime": "۱۴۰۰/۵/۱۰،‏ ۱۹:۰۵:۵۴",
+      "status": "true",
       "product": [
         {
           "name": "گوشی موبایل سامسونگ مدل Galaxy A51 SM-A515F/DSN دو سیم کارت ظرفیت 128گیگابایت",
@@ -485,6 +474,58 @@
       "address": "تهران نیاوران",
       "createdAt": 1627709523229,
       "id": 7
+    },
+    {
+      "name": "ایمان",
+      "family": "شفیعی",
+      "phone": "09140455875",
+      "deliveryTime": "2021-08-01T15:39:24.388Z",
+      "sumBuying": 151843000,
+      "endDeliveriTime": "۱۴۰۰/۵/۱۰،‏ ۱۹:۱۱:۰۴",
+      "status": "true",
+      "product": [
+        {
+          "name": "لپ تاپ 15 اینچی لنوو مدل IdeaPad Gaming 3 15IMH05",
+          "id": 5,
+          "groupname": "لپتاپ",
+          "subgroupname": "lenovo",
+          "price": "28000000",
+          "counter": "5"
+        },
+        {
+          "name": "اس اس دی اینترنال وسترن دیجیتال مدل Green WDS240G2G0A ظرفیت 240 گیگابایت",
+          "id": 13,
+          "groupname": "هارد و فلش",
+          "subgroupname": "وسترن دیجیتال",
+          "price": "911000",
+          "counter": "13"
+        }
+      ],
+      "address": "ایمانشهر",
+      "createdAt": 1627828805865,
+      "id": 8
+    },
+    {
+      "name": "علی",
+      "family": "ضیایی جزی",
+      "phone": "09135",
+      "deliveryTime": "2021-08-16T19:30:00.000Z",
+      "sumBuying": 11950000,
+      "endDeliveriTime": "۱۴۰۰/۵/۱۲،‏ ۲۲:۳۵:۰۸",
+      "status": "true",
+      "product": [
+        {
+          "name": "لپ تاپ 15.6 اینچی ایسوس مدل R565MA-BQ197",
+          "id": 4,
+          "groupname": "لپتاپ",
+          "subgroupname": "asus",
+          "price": "11950000",
+          "counter": 1
+        }
+      ],
+      "address": "گز برخوار",
+      "createdAt": 1628013894805,
+      "id": 9
     }
   ]
 }

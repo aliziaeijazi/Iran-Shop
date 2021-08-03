@@ -51,7 +51,7 @@ const useStyles = makeStyles({
 
 
 let bcolor
-export default function StickyHeadTable(props) {
+export default function OrderTable(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -90,7 +90,7 @@ export default function StickyHeadTable(props) {
     }, [])
     useEffect(() => {
         gettingData(props.kind)
-    }, [props.kind])
+    }, [props.kind , modalStatus])
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -147,8 +147,8 @@ export default function StickyHeadTable(props) {
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                onChangePage={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                onPageChange={handleChangePage}
                 labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
             <Detail open={modalStatus} id={id} falsemodal={() => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import {Typography} from "@material-ui/core";
-import StickyHeadTable from "./components/Table/Table.component";
+import OrderTable from "./components/Table/Table.component";
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(2),
         },
         flex: 1,
-
-
     },
     paper: {
         padding: theme.spacing(2),
@@ -61,7 +59,7 @@ function Orders() {
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <StickyHeadTable kind={kind}/>
+                    <OrderTable kind={kind}/>
                 </Paper>
             </div>
     );

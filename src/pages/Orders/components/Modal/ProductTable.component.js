@@ -138,8 +138,8 @@ export default function ProductTable(props) {
                 count={rows.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-                onChangePage={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                onPageChange={handleChangePage}
                 labelRowsPerPage={'تعداد سطر در هر صفحه'}
             />
         </Paper>

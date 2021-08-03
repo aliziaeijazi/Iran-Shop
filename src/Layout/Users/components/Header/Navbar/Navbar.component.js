@@ -1,25 +1,18 @@
-import {makeStyles, MuiThemeProvider} from '@material-ui/core/styles';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import Badge from '@material-ui/core/Badge';
 import {withStyles} from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import IconMenu from '@material-ui/icons/Menu';
 import SettingsIcon from '@material-ui/icons/Settings';
 import {useHistory} from "react-router-dom";
 import {connect} from "react-redux";
+import {setItems} from "../../../../../redux/action/Basket.action";
 
 const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -56,6 +49,12 @@ const StyledMenu = withStyles({
 function Nav(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const history = useHistory()
+    useEffect(async()=>{
+        const Basket = await JSON.parse(localStorage.getItem("BasketList"))
+        if(Basket){
+            props.setItems(Basket)
+        }
+    },[])
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
         console.log(event.currentTarget)
@@ -110,5 +109,11 @@ function Nav(props) {
 const mapStateToProps = (state) => {
     return {basketItems: state.Basket.basketList}
 }
-const NavBar = connect(mapStateToProps)(Nav)
+
+const  mapDispatchToProps =  (dispatch) =>{
+    return {
+        setItems: (Data) => dispatch(setItems(Data))
+    }
+}
+const NavBar = connect(mapStateToProps , mapDispatchToProps)(Nav)
 export {NavBar}

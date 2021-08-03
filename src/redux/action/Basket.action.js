@@ -17,3 +17,9 @@ export const deleteFromBasket = (index)=>{
         data:{index}
     }
 }
+export const setItems = (value)=>{
+    return {
+        type:"SET_ITEMS",
+        data:value  
+    }
+}

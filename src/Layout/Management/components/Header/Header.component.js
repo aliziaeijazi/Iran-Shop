@@ -4,6 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {Link} from "react-router-dom";
 import {StoreName} from "./StoreName/StoreName.component";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,12 +18,9 @@ const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
-    title: {
-        fontWeight:700
-    },
     flex: {
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         flexWrap:"wrap"
     }
 }));
@@ -34,8 +33,8 @@ function Header() {
                 <Toolbar className={classes.flex}>
                     <StoreName/>
                     <NavBar/>
-                    <Link to="/" variant="h5" className={classes.title}>
-                        بازگشت به سایت
+                    <Link to="/" >
+                        <ExitToAppIcon/>
                     </Link>
                 </Toolbar>
             </AppBar>

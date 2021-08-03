@@ -10,6 +10,8 @@ const BasketReducer = (state = initialstate, action) => {
             return {...state,basketList:[...state.basketList.slice(0,action.data.index),{...state.basketList[action.data.index],counter:action.data.value},...state.basketList.slice(action.data.index+1)]}
         case "DELETE_FROM_BASKET":
             return {...state,basketList:[...state.basketList.slice(0,action.data.index) , ...state.basketList.slice(action.data.index+1)]}
+        case "SET_ITEMS":
+            return {...state , basketList: action.data}
         default:
             return state
     }

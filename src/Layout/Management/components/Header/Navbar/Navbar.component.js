@@ -1,41 +1,40 @@
-import {useState, createRef, useEffect} from 'react';
+import {useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
+import StoreIcon from '@material-ui/icons/Store';
+import LocalConvenienceStoreIcon from '@material-ui/icons/LocalConvenienceStore';
+import {useHistory} from "react-router-dom";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: 500,
-        fontWeight:"bolder",
+        fontWeight: "bolder",
+        [theme.breakpoints.down('sm')]: {
+            width: 400
+        }
+
     },
-    btnbackground: {
-        backgroundColor: "lightskyblue",
-    }
-});
+}));
 
 function NavBar() {
     const classes = useStyles();
-    const [value, setValue] = useState(0);
-    useEffect(() => {
-        if (document.location.pathname == "/management/productlist") setValue(0)
-        else if (document.location.pathname == "/management/supply") setValue(1)
-        else if (document.location.pathname == "/management/orders") setValue(2)
-        handlechang()
-    })
-    const btnRef=[createRef() ,createRef() , createRef()]
-    const handlechang =() =>{
-        btnRef.map((target)=>target.current.classList.remove(classes.btnbackground))
-        btnRef[value].current.classList.add(classes.btnbackground)
+    const history = useHistory()
+    const [value, setValue] = useState('/management/productlist');
+    const handleChange = (event, newValue) => {
+        history.push(newValue)
+        setValue(newValue)
     }
     return (
         <BottomNavigation
             value={value}
-            showLabels
             className={classes.root}
+            onChange={handleChange}
         >
-            <BottomNavigationAction ref={btnRef[0]} label="کالاها" href={"/management/productlist"}/>
-            <BottomNavigationAction ref={btnRef[1]} label="موجودی و قیمت ها" href={"/management/supply"}/>
-            <BottomNavigationAction ref={btnRef[2]} label="سفارش ها" href={"/management/orders"}/>
+            <BottomNavigationAction label="کالاها" value={'/management/productlist'} icon={<StoreIcon/>}/>
+            <BottomNavigationAction label="موجودی و قیمت " value={"/management/supply"} icon={<LocalConvenienceStoreIcon/>}/>
+            <BottomNavigationAction label="سفارش ها" value={"/management/orders"} icon={<LocalGroceryStoreIcon/>}/>
         </BottomNavigation>
 
     );
